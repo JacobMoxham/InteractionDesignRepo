@@ -1,0 +1,4 @@
+
+public enum Flag {
+	GREEN, YELLOW, REDYELLOW, RED, NOTOPERATIONAL;
+}
