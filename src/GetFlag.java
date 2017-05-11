@@ -51,7 +51,7 @@ public class GetFlag{
 	    else if(flagColour.toLowerCase().equals("red")) return Flag.RED;
 	    else if(flagColour.toLowerCase().equals("red/yellow")) return Flag.REDYELLOW;
 	    else if(flagColour.toLowerCase().equals("not operational")) return Flag.NOTOPERATIONAL;
-	    else return null; // return null if not found
+	    else return null; // return null if flag colour was not found
 	    
 	}	
 
