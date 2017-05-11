@@ -9,24 +9,24 @@ import java.util.regex.Pattern;
 public class GetFlag{
 
 	
-	private static final Pattern pattern = Pattern.compile("<td>The flag is currently <strong>(.+?)</strong></td>");
+	private static final Pattern pattern = Pattern.compile("<td>The flag is currently <strong>(.+?)</strong></td>"); // Pattern to look for Flag colour;
 	private static final String page = "http://www.cucbc.org/flag";
 	
-	public static Flag FlagColour() throws FlagNotFoundExeption 
+	public static Flag FlagColour() throws FlagNotFoundException 
 	{
 		String flagColour = null;
 		
-	    try 
+	    try  
 	    {
 	        URLConnection connection = new URL(page).openConnection();
-	        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+	        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream())); // Open the website
 	        String line;
-	        while ((line = in.readLine()) != null) 
+	        while ((line = in.readLine()) != null) // read line by line;
 	        {
 	        	
-	        	if(line.contains("The flag is currently"))
+	        	if(line.contains("The flag is currently")) // If we found a line where we have a colour of flag
 	        	{
-	        		final Matcher matcher = pattern.matcher(line);
+	        		final Matcher matcher = pattern.matcher(line); // get colour of flag;
 	        		if (matcher.find()){
 	        			flagColour = matcher.group(1).toString();
 	        			break;
@@ -34,7 +34,7 @@ public class GetFlag{
 	        	}
 	        	else
 	        	{
-	        		throw new FlagNotFoundExeption("Today we won't have the colour of flag. :/");
+	        		throw new FlagNotFoundException("Today we won't have the colour of flag. :/");
 	        	}
 	        }
 	        in.close();
@@ -44,12 +44,15 @@ public class GetFlag{
 	        System.out.println("Can't open the website");
 	    }
 	    
+	    
+	    // return colour of flag
 	    if(flagColour.toLowerCase().equals("green")) return Flag.GREEN;
 	    else if(flagColour.toLowerCase().equals("yellow")) return Flag.YELLOW;
 	    else if(flagColour.toLowerCase().equals("red")) return Flag.RED;
 	    else if(flagColour.toLowerCase().equals("red/yellow")) return Flag.REDYELLOW;
 	    else if(flagColour.toLowerCase().equals("not operational")) return Flag.NOTOPERATIONAL;
-	    else return null;
+	    else return null; // return null if not found
+	    
 	}	
 
 }
