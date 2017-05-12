@@ -6,6 +6,7 @@ public class WeatherObject {
 	private String iconURL;
 	private String windSpeed;
 	private String windDegree;
+	private boolean clickable;
 	
 	//Constructor setting all private state
 	public WeatherObject(String date, String time, String temp, String iconURL,String windSpeed, String windDegree){
@@ -16,6 +17,18 @@ public class WeatherObject {
 		this.iconURL = iconURL;
 		this.windSpeed = windSpeed;
 		this.windDegree = windDegree;
+		this.clickable = false;
+
+	}
+	public WeatherObject(String date, String time, String temp, String iconURL,String windSpeed, String windDegree, boolean clickable){
+		//Sets all state to passed values
+		this.date = date;
+		this.time = time;
+		this.temp = temp;
+		this.iconURL = iconURL;
+		this.windSpeed = windSpeed;
+		this.windDegree = windDegree;
+		this.clickable = clickable;
 
 	}
 
@@ -67,6 +80,14 @@ public class WeatherObject {
 
 	public void setWindDegree(String windDegree) {
 		this.windDegree = windDegree;
+	}
+
+	public boolean isClickable() {
+		return clickable;
+	}
+
+	public void setClickable(boolean clickable) {
+		this.clickable = clickable;
 	}
 	
 }
