@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import net.aksingh.owmjapis.CurrentWeather;
+import net.aksingh.owmjapis.DailyForecast;
 import net.aksingh.owmjapis.HourlyForecast;
 import net.aksingh.owmjapis.HourlyForecast.Forecast;
 import net.aksingh.owmjapis.OpenWeatherMap;
@@ -64,9 +65,9 @@ public class WeatherDataReader {
 		String iconURL;
 		String windDegree;
 		
-		ArrayList<List<WeatherObject>> days = new ArrayList<>();;
+		ArrayList<List<WeatherObject>> days = new ArrayList<>();
 		
-        // get Weather data for now in Cambridge
+        // get Weather data for next few days in Cambridge
         HourlyForecast hwd;
 		try {
 			//Gets data for Cambridge
@@ -116,14 +117,77 @@ public class WeatherDataReader {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		//Test code
+		/*for(List<WeatherObject> ws: days){
+			for(WeatherObject w: ws){
+				System.out.println(w.getDate());
+			}
+			System.out.println();
+		}*/
+		
 		//Returns a list of forecasts for each of the next 5 days in order
 		return days;
 	}
-	//For testing only
-	/*
-	public static void main(String args[]){
-		WeatherObject wdo = WeatherDataReader.getDataForNow();
+	public static List<WeatherObject> getDayForecasts(){
+		String temp;
+		String time;
+		String windSpeed;
+		String date;
+		String iconURL;
+		String windDegree;
 		
+		ArrayList<WeatherObject> daysForecast = new ArrayList<>();
+		
+        DailyForecast dwd;
+		try {
+			//Gets data for Cambridge
+			dwd = owm.dailyForecastByCityName("Cambridge", (byte) 15);
+			int n = dwd.getForecastCount();
+			
+			for(int i =0; i < n; i++){
+				//Gets the next forecast
+				net.aksingh.owmjapis.DailyForecast.Forecast forecast = dwd.getForecastInstance(i);
+				
+				//populates the variables for this forecast 
+				temp = Float.toString(forecast.getTemperatureInstance().getDayTemperature());
+				date = forecast.getDateTime().toString();
+				time = String.valueOf(forecast.getDateTime()).split("\\s")[3];
+				windSpeed = String.valueOf(forecast.getWindSpeed());
+				windDegree = String.valueOf(forecast.getWindDegree());
+				iconURL = "http://openweathermap.org/img/w/" + forecast.getWeatherInstance(0).getWeatherIconName() +".png";
+				//Creates weather object for weather at this time
+				WeatherObject weatherNow = new WeatherObject(date,time,temp,iconURL,windSpeed,windDegree);
+				
+				
+				
+				daysForecast.add(weatherNow);
+				
+			}
+	
+	        
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//Test code
+		/*for(WeatherObject w: daysForecast){
+			System.out.println(w.getDate());
+		}*/
+		
+		//Returns a list of forecasts for each of the next 5 days in order
+		return daysForecast;
 	}
-	*/
+	//For testing only
+	
+	/*public static void main(String args[]){
+		List<WeatherObject> wd1 = WeatherDataReader.getDayForecasts();
+		List<List<WeatherObject>> wd2 = WeatherDataReader.getNextFiveDaysHourly();
+		
+	}*/
+	
 }
