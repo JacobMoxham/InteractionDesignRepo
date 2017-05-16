@@ -1,4 +1,9 @@
+import java.util.List;
+
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
@@ -16,7 +21,13 @@ public class By3HoursController {
 	public void setMainApp(MainApp mainApp){
 		this.mainApp = mainApp;
 		
+		
+		
 		//TODO: Populate VBOX
-		weatherForecasts.getChildren().addAll(MainApp.class.getResource("Blade.fxml"));
+		for(List<WeatherObject> l : WeatherDataReader.getNextFiveDaysHourly()){
+			weatherForecasts.getChildren().addAll(new Button("Click Me"));
+			//TODO: Add label
+		}
+		
 	}
 }
