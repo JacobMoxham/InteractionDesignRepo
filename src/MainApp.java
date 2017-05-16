@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +24,7 @@ public class MainApp extends Application {
 	     
 	     List<List<WeatherObject>> by3Hours = WeatherDataReader.getNextFiveDaysHourly();
 	     
-	     //showSplash();
+	     showBasicFrame();
 		
 	}
 	public void initRootLayout(){
@@ -41,15 +42,15 @@ public class MainApp extends Application {
 	            e.printStackTrace();
 	        }
 	}
-	 public void showSplash() {
+	 public void showBasicFrame() {
 	        try {
 	            // Load person overview.
 	            FXMLLoader loader = new FXMLLoader();
-	            loader.setLocation(MainApp.class.getResource("view/SplashPage.fxml"));
-	            AnchorPane personOverview = (AnchorPane) loader.load();
+	            loader.setLocation(MainApp.class.getResource("BasicFrame.fxml"));
+	            AnchorPane basicView = (AnchorPane) loader.load();
 
 	            // Set person overview into the center of root layout.
-	            rootLayout.setCenter(personOverview);
+	            rootLayout.setCenter(basicView);
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
