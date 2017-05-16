@@ -2,6 +2,8 @@ import java.io.IOException;
 import java.util.List;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -23,11 +25,18 @@ public class MainApp extends Application {
 
 	     
 	     List<List<WeatherObject>> by3Hours = WeatherDataReader.getNextFiveDaysHourly();
+	     List<WeatherObject> byDay = WeatherDataReader.getDayForecasts();
+	     WeatherObject now = WeatherDataReader.getDataForNow();
+	     
+	     
+	     
 	     
 	     showBasicFrame();
 		
 	}
-	public void initRootLayout(){
+	 
+	
+	private void initRootLayout(){
 		 try {
 	            // Load root layout from fxml file.
 	            FXMLLoader loader = new FXMLLoader();
@@ -51,6 +60,12 @@ public class MainApp extends Application {
 
 	            // Set person overview into the center of root layout.
 	            rootLayout.setCenter(basicView);
+	            
+	            
+	            //Give controller access to the main app
+	            By3HoursController controller = loader.getController();
+	            controller.setMainApp(this);
+	            
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
