@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.canvas.*?>
-<?import javafx.scene.control.*?>
-<?import com.jfoenix.controls.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="By3HoursController">
    <children>
-      <ImageView fitHeight="643.0" fitWidth="858.0" layoutX="-59.0">
+      <ImageView fitHeight="630.0" fitWidth="851.0" layoutX="-304.0" layoutY="-15.0">
          <image>
-            <Image url="@../../Users/Joe/Pictures/1280px-Churchill_College_Boat_Club_Lent_Bumps_2008_M4.JPG" />
+            <Image url="@1280px-Churchill_College_Boat_Club_Lent_Bumps_2008_M4.JPG" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="572.0" prefWidth="323.0">
-         <children>
-            <JFXNodesList />
-         </children>
-      </AnchorPane>
+      <VBox fx:id="weatherForecasts" layoutX="10.0" layoutY="10.0" prefHeight="600.0" prefWidth="350.0" />
    </children>
 </AnchorPane>
