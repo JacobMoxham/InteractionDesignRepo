@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class WeatherObject {
 	private String date;
@@ -11,18 +12,17 @@ public class WeatherObject {
 	//Constructor setting all private state
 	public WeatherObject(String date, String time, String temp, String iconURL,String windSpeed, String windDegree){
 		//Sets all state to passed values
-		this.date = date;
-		this.time = time;
-		this.temp = temp;
-		this.iconURL = iconURL;
-		this.windSpeed = windSpeed;
-		this.windDegree = windDegree;
-		this.clickable = false;
+		this(date,time,temp,iconURL,windSpeed,windDegree,false);
 
 	}
 	public WeatherObject(String date, String time, String temp, String iconURL,String windSpeed, String windDegree, boolean clickable){
 		//Sets all state to passed values
 		this.date = date;
+		
+		//trims time
+		String[] timeArray = time.split(":");
+		time = timeArray[0] +":"+timeArray[1];
+		
 		this.time = time;
 		this.temp = temp;
 		this.iconURL = iconURL;

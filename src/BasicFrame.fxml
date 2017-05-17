@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,6 +13,14 @@
             <Image url="@1280px-Churchill_College_Boat_Club_Lent_Bumps_2008_M4.JPG" />
          </image>
       </ImageView>
-      <VBox fx:id="weatherForecasts" layoutX="10.0" layoutY="10.0" prefHeight="600.0" prefWidth="350.0" />
+      <ScrollPane prefHeight="600.0" prefWidth="350.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <VBox fx:id="weatherForecasts" prefHeight="600.0" prefWidth="350.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
    </children>
 </AnchorPane>
