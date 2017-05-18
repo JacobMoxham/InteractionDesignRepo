@@ -21,16 +21,7 @@ public class MainApp extends Application {
 		 this.primaryStage = primaryStage;
 	     this.primaryStage.setTitle("Ergs Don't FLoat");
 
-	     initRootLayout();
-
-	     
-	     List<List<WeatherObject>> by3Hours = WeatherDataReader.getNextFiveDaysHourly();
-	     List<WeatherObject> byDay = WeatherDataReader.getDayForecasts();
-	     WeatherObject now = WeatherDataReader.getDataForNow();
-	     
-	     
-	     
-	     
+	     initRootLayout();     
 	     showBasicFrame();
 		
 	}

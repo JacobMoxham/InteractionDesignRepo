@@ -21,7 +21,7 @@ public class BladeController {
 	private Text day;
 	
 	@FXML
-	private StringProperty windImage = new SimpleStringProperty();
+	private StringProperty windDegreeString = new SimpleStringProperty();
 	@FXML
 	private StringProperty windText = new SimpleStringProperty();
 	@FXML
@@ -42,6 +42,8 @@ public class BladeController {
 		this.weather.setImage(new Image(weatherImage.get()));
 		this.day.setText(dayString.get().split("\\s")[0]);
 		this.degrees.setText(degreesString.get());
+		this.windImageObj.setImage(new Image("winddirection.png"));
+		this.windImageObj.setRotate(Double.parseDouble(windDegreeString.get()));
 		
 		// aidens addition - windDegrees and setWindImage
 		//this.windImageObj = 
@@ -55,12 +57,11 @@ public class BladeController {
 		timeString.set(time);
 		weatherImage.set(iconURL);
 		degreesString.set(temp);
-		//TODO: set wind image
 		dayString.set(date);
 		windText.set(windSpeed);
 		
 		// aidens addition - rotate according to degrees
-		windImageObj.setRotate(Double.parseDouble(windDegree));
+		windDegreeString.set(windDegree);
 	}
 	
 	public void setMainApp(MainApp mainApp){
