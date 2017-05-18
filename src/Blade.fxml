@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -15,25 +10,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="93.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="93.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="92.0" fitWidth="350.0">
-         <image>
-            <Image url="@500px-Rowing_Blade_White.png" />
-         </image>
-      </ImageView>
-      <GridPane prefHeight="93.0" prefWidth="350.0">
+      <ImageView fx:id="bladeImage" fitHeight="92.0" fitWidth="347.0" layoutX="-4.0" />
+      <GridPane prefHeight="93.0" prefWidth="340.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <GridPane>
+            <GridPane prefHeight="93.0" prefWidth="108.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -56,19 +47,20 @@
                   </Text>
                </children>
             </GridPane>
-            <ImageView fx:id="windImageObj" fitHeight="64.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
-            <ImageView fx:id="weather" fitHeight="75.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+            <ImageView fx:id="windImageObj" fitHeight="64.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
             <Text fx:id="degrees" strokeType="OUTSIDE" strokeWidth="0.0" text="11°C" wrappingWidth="103.2265625" GridPane.columnIndex="3">
                <font>
                   <Font size="30.0" />
                </font>
             </Text>
-            <Text fx:id="windTextObj" strokeType="OUTSIDE" strokeWidth="0.0" text="9" textAlignment="CENTER" wrappingWidth="67.7294921875" GridPane.columnIndex="1">
+            <Text fx:id="windTextObj" strokeType="OUTSIDE" strokeWidth="0.0" text="9" textAlignment="CENTER" wrappingWidth="67.7294921875" GridPane.columnIndex="2">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
+            <ImageView fx:id="weather" fitHeight="75.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
          </children>
       </GridPane>
+      <Button fx:id="bladeButton" mnemonicParsing="false" onAction="#bladePress" onMouseClicked="#bladePress" opacity="0.0" prefHeight="93.0" prefWidth="340.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>
