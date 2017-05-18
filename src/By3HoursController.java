@@ -47,11 +47,16 @@ public class By3HoursController {
 				forecasts.add(label);
 			}
 			
-			//tests
+			//test
 			System.out.println("No Blades:" + total);
+			
+			
+			
 			weatherForecasts.getChildren().addAll(forecasts);
 			
+			//test
 			System.out.println("No children of VBox: "+weatherForecasts.getChildren().size());
+			System.out.println();
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

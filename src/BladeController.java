@@ -41,7 +41,7 @@ public class BladeController {
 		this.windTextObj.setText(windText.get().split("\\.")[0]);
 		this.weather.setImage(new Image(weatherImage.get()));
 		this.day.setText(dayString.get().split("\\s")[0]);
-		this.degrees.setText(degreesString.get().split("\\.")[0]);
+		this.degrees.setText(degreesString.get());
 		
 		
 	}
@@ -52,7 +52,7 @@ public class BladeController {
 	public BladeController(String temp,String time,String iconURL,String windDegree,String windSpeed,String date){
 		timeString.set(time);
 		weatherImage.set(iconURL);
-		degreesString.set(windDegree);
+		degreesString.set(temp);
 		//TODO: set wind image
 		dayString.set(date);
 		windText.set(windSpeed);

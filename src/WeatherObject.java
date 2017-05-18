@@ -24,7 +24,7 @@ public class WeatherObject {
 		time = timeArray[0] +":"+timeArray[1];
 		
 		this.time = time;
-		this.temp = temp;
+		this.temp = temp.split("\\.")[0];
 		this.iconURL = iconURL;
 		this.windSpeed = windSpeed;
 		this.windDegree = windDegree;
