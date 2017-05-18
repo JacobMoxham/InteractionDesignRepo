@@ -43,6 +43,8 @@ public class BladeController {
 		this.day.setText(dayString.get().split("\\s")[0]);
 		this.degrees.setText(degreesString.get());
 		
+		// aidens addition - windDegrees and setWindImage
+		//this.windImageObj = 
 		
 	}
 	
@@ -56,6 +58,9 @@ public class BladeController {
 		//TODO: set wind image
 		dayString.set(date);
 		windText.set(windSpeed);
+		
+		// aidens addition - rotate according to degrees
+		windImageObj.setRotate(Double.parseDouble(windDegree));
 	}
 	
 	public void setMainApp(MainApp mainApp){
