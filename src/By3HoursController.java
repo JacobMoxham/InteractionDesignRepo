@@ -26,12 +26,13 @@ public class By3HoursController {
 		
 		
 		
-		//TODO: Populate VBOX
+		
 		
 			
 		try {
+			//Populate VBOX
 			ObservableList<Node> forecasts = FXCollections.observableArrayList();
-			
+			int total = 0;
 			for(List<WeatherObject> l : WeatherDataReader.getNextFiveDaysHourly()){
 				for(WeatherObject w: l){
 					FXMLLoader loader = new FXMLLoader();
@@ -39,12 +40,19 @@ public class By3HoursController {
 					loader.setLocation(MainApp.class.getResource("Blade.fxml"));
 					Node thisBlade = (Node) loader.load();
 					forecasts.add(thisBlade);
+					total++;
 				}
 				//TODO: Add label
 				Label label = new Label("This is a day label");
 				forecasts.add(label);
 			}
+			
+			//tests
+			System.out.println("No Blades:" + total);
 			weatherForecasts.getChildren().addAll(forecasts);
+			
+			System.out.println("No children of VBox: "+weatherForecasts.getChildren().size());
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

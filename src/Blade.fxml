@@ -51,11 +51,16 @@
                   </Text>
                </children>
             </GridPane>
-            <ImageView fx:id="wind" fitHeight="64.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+            <ImageView fx:id="windImageObj" fitHeight="64.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
             <ImageView fx:id="weather" fitHeight="75.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
             <Text fx:id="degrees" strokeType="OUTSIDE" strokeWidth="0.0" text="11°C" wrappingWidth="103.2265625" GridPane.columnIndex="3">
                <font>
                   <Font size="30.0" />
+               </font>
+            </Text>
+            <Text fx:id="windTextObj" strokeType="OUTSIDE" strokeWidth="0.0" text="9" textAlignment="CENTER" wrappingWidth="67.7294921875" GridPane.columnIndex="1">
+               <font>
+                  <Font size="24.0" />
                </font>
             </Text>
          </children>

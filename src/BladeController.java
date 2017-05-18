@@ -1,13 +1,16 @@
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.util.converter.TimeStringConverter;
 
 public class BladeController {
 	@FXML
-	private ImageView wind;
+	private ImageView windImageObj;
+	@FXML
+	private Text windTextObj;
 	@FXML
 	private ImageView weather;
 	@FXML
@@ -19,6 +22,8 @@ public class BladeController {
 	
 	@FXML
 	private StringProperty windImage = new SimpleStringProperty();
+	@FXML
+	private StringProperty windText = new SimpleStringProperty();
 	@FXML
 	private StringProperty weatherImage= new SimpleStringProperty();
 	@FXML
@@ -33,6 +38,11 @@ public class BladeController {
 	
 	public void initialize(){
 		this.time.setText(timeString.get());
+		this.windTextObj.setText(windText.get().split("\\.")[0]);
+		this.weather.setImage(new Image(weatherImage.get()));
+		this.day.setText(dayString.get().split("\\s")[0]);
+		this.degrees.setText(degreesString.get().split("\\.")[0]);
+		
 		
 	}
 	
@@ -41,6 +51,11 @@ public class BladeController {
 	}
 	public BladeController(String temp,String time,String iconURL,String windDegree,String windSpeed,String date){
 		timeString.set(time);
+		weatherImage.set(iconURL);
+		degreesString.set(windDegree);
+		//TODO: set wind image
+		dayString.set(date);
+		windText.set(windSpeed);
 	}
 	
 	public void setMainApp(MainApp mainApp){
