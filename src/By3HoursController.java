@@ -38,7 +38,8 @@ public class By3HoursController {
 			
 			//test value
 			//int total = 0;
-			
+			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("Blade.fxml"));
+
 			for(List<WeatherObject> l : WeatherDataReader.getNextFiveDaysHourly()){
 				//Adds the correct week Day label
 				if (notFirst){
@@ -47,14 +48,25 @@ public class By3HoursController {
 					label.setFont(new Font("Arial", 24.0));
 					forecasts.add(label);
 				}
-				//Ensures not weekday label for today
+				//Ensures no weekday label for today
 				notFirst = true;
+
 				for(WeatherObject w: l){
-					FXMLLoader loader = new FXMLLoader();
-					loader.setController(new BladeController(w.getTemp(),w.getTime(),w.getIconURL(),w.getWindDegree(),w.getWindSpeed(),w.getDate()));
-					loader.setLocation(MainApp.class.getResource("Blade.fxml"));
+					//--Less efficient version of the hack around below--
+					//FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("Blade.fxml"));
+					//loader.setController(new BladeController(w.getTemp(),w.getTime(),w.getIconURL(),w.getWindDegree(),w.getWindSpeed(),w.getDate()));
+					//Node thisBlade = (Node) loader.load();
+					
+					
 					Node thisBlade = (Node) loader.load();
+					BladeController cont = (BladeController) loader.getController();
+					cont.instantiate(w.getTemp(),w.getTime(),w.getIconURL(),w.getWindDegree(),w.getWindSpeed(),w.getDate());
+					
 					forecasts.add(thisBlade);
+					
+					//Allows us to read in another instance
+					loader.setRoot(null);
+					loader.setController(null);
 					//total++;
 				}
 			}

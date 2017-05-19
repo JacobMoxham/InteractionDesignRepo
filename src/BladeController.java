@@ -48,18 +48,14 @@ public class BladeController {
 	private MainApp mainApp;
 	
 	public void initialize(){
-		//Set the components based on the string objects
-		this.time.setText(timeString.get());
-		this.windTextObj.setText(windText.get().split("\\.")[0]);
-		this.weather.setImage(new Image(weatherImage.get()));
-		this.day.setText(dayString.get().split("\\s")[0]);
-		this.degrees.setText(degreesString.get()+"\u00b0"+"C");
-		this.windImageObj.setImage(new Image("winddirection.png"));
-		//Rotates the wind image based on the wind degree
-		this.windImageObj.setRotate(Double.parseDouble(windDegreeString.get()));
-		this.bladeImage.setImage(new Image(bladeString.get()));
+		
 	}
-	
+	public BladeController(){
+		
+	}
+	/*
+	 * Method for instantiation changed for efficiency
+	 * 
 	public BladeController(String temp,String time,String iconURL,String windDegree,String windSpeed,String date,Boolean clickable){
 		//Set string variables
 		timeString.set(time);
@@ -75,8 +71,38 @@ public class BladeController {
 			bladeString.set("500px-Rowing_Blade_Cambridge Blue.png");
 		}
 	}
+	
 	public BladeController(String temp,String time,String iconURL,String windDegree,String windSpeed,String date){
 		this(temp,time,iconURL,windDegree,windSpeed,date,false);
+	}*/
+	public void instantiate(String temp,String time,String iconURL,String windDegree,String windSpeed,String date,Boolean clickable){
+		//Set string variables
+		timeString.set(time);
+		weatherImage.set(iconURL);
+		degreesString.set(temp);
+		dayString.set(date);
+		windText.set(windSpeed);
+		windDegreeString.set(windDegree);
+		this.clickable = clickable;
+		if (clickable){
+			bladeString.set("500px-Rowing_Tan.png");
+		}else{
+			bladeString.set("500px-Rowing_Blade_Cambridge Blue.png");
+		}
+		
+		//Set the components based on the string objects
+		this.time.setText(timeString.get());
+		this.windTextObj.setText(windText.get().split("\\.")[0]);
+		this.weather.setImage(new Image(weatherImage.get()));
+		this.day.setText(dayString.get().split("\\s")[0]);
+		this.degrees.setText(degreesString.get()+"\u00b0"+"C");
+		this.windImageObj.setImage(new Image("winddirection.png"));
+		//Rotates the wind image based on the wind degree
+		this.windImageObj.setRotate(Double.parseDouble(windDegreeString.get()));
+		this.bladeImage.setImage(new Image(bladeString.get()));
+	}
+	public void instantiate(String temp,String time,String iconURL,String windDegree,String windSpeed,String date){
+		instantiate(temp,time,iconURL,windDegree,windSpeed,date,false);
 	}
 	@FXML
 	public void bladePress(){
