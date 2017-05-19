@@ -17,6 +17,10 @@ public class WeatherDataReader {
 	//declaration object of "OpenWeatherMap" class
 	private static final OpenWeatherMap owm = new OpenWeatherMap("905f034cce04a8e662d05167ca595882");
 	
+	
+	//Const for degrees conversion
+	private final static double farenheightProportionality = 5.0/9.0;
+	
 	public static WeatherObject getDataForNow() {
        
 		String temp;
@@ -34,7 +38,7 @@ public class WeatherDataReader {
 			
 			//Populates variables for this time
 			
-			temp = Float.toString(cwd.getMainInstance().getTemperature());
+			temp = Double.toString((cwd.getMainInstance().getTemperature() - 32.0)*farenheightProportionality);
 			date = cwd.getDateTime().toString();
 			time = String.valueOf(cwd.getDateTime()).split("\\s")[3];
 			windSpeed = String.valueOf(cwd.getWindInstance().getWindSpeed());
@@ -70,6 +74,8 @@ public class WeatherDataReader {
         // get Weather data for next few days in Cambridge
         HourlyForecast hwd;
 		try {
+			//Constant
+			final double farenheightProportionality = 5.0/9.0;
 			//Gets data for Cambridge
 			hwd = owm.hourlyForecastByCityName("Cambridge");
 			int n = hwd.getForecastCount();
@@ -82,7 +88,7 @@ public class WeatherDataReader {
 				Forecast forecast = hwd.getForecastInstance(i);
 				
 				//populates the variables for this forecast 
-				temp = Float.toString(forecast.getMainInstance().getTemperature());
+				temp = Double.toString((forecast.getMainInstance().getTemperature() - 32.0)*farenheightProportionality);
 				date = forecast.getDateTime().toString();
 				time = String.valueOf(forecast.getDateTime()).split("\\s")[3];
 				windSpeed = String.valueOf(forecast.getWindInstance().getWindSpeed());
@@ -150,7 +156,7 @@ public class WeatherDataReader {
 				net.aksingh.owmjapis.DailyForecast.Forecast forecast = dwd.getForecastInstance(i);
 				
 				//populates the variables for this forecast 
-				temp = Float.toString(forecast.getTemperatureInstance().getDayTemperature());
+				temp = Double.toString((forecast.getTemperatureInstance().getDayTemperature() -32.0)*farenheightProportionality);
 				date = forecast.getDateTime().toString();
 				time = String.valueOf(forecast.getDateTime()).split("\\s")[3];
 				windSpeed = String.valueOf(forecast.getWindSpeed());
