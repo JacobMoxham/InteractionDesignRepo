@@ -23,7 +23,6 @@ public class GetFlag{
 	        String line;
 	        while ((line = in.readLine()) != null) // read line by line;
 	        {
-	        	
 	        	if(line.contains("The flag is currently")) // If we found a line where we have a colour of flag
 	        	{
 	        		final Matcher matcher = pattern.matcher(line); // get colour of flag;
@@ -31,11 +30,12 @@ public class GetFlag{
 	        			flagColour = matcher.group(1).toString();
 	        			break;
 	        		}
+	        		else
+		        	{
+		        		throw new FlagNotFoundException("Today we won't have the colour of flag. :/");
+		        	}
 	        	}
-	        	else
-	        	{
-	        		throw new FlagNotFoundException("Today we won't have the colour of flag. :/");
-	        	}
+	        	
 	        }
 	        in.close();
 	    } 
