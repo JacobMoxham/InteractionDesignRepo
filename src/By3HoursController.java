@@ -14,6 +14,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
@@ -31,10 +33,39 @@ public class By3HoursController {
 	public void setMainApp(MainApp mainApp){
 		this.mainApp = mainApp;	
 		try {
+		
 			//Populate VBOX
 			ObservableList<Node> forecasts = FXCollections.observableArrayList();
 			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("Blade.fxml"));
-
+			
+			try{
+				//Gets the current flag colour
+				Flag flag = GetFlag.FlagColour();
+				Image flagImg=null;
+				switch (flag) {
+					case GREEN:
+						flagImg = new Image("flaggreensmall.png");
+						break;
+					case YELLOW:
+						flagImg = new Image("flagyellowsmall.png");
+						break;
+					case REDYELLOW:
+						flagImg = new Image("flagyellowredsmall.png");
+						break;
+					case RED:
+						flagImg = new Image("flagredsmall.png");
+						break;
+					case NOTOPERATIONAL:
+						//TODO: handle this case
+						break;
+				}
+				forecasts.add(new ImageView(flagImg));
+					
+			}catch (FlagNotFoundException f){
+				System.out.println("Flag not found");
+				f.printStackTrace();
+			}
+			
 			//Current weather
 			Label todayLabel = new Label("Today");
 			todayLabel.setAlignment(Pos.CENTER);
@@ -103,6 +134,7 @@ public class By3HoursController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 			
 		
 		
