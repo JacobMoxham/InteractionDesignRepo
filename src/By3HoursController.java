@@ -1,5 +1,10 @@
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Date;
+
+import javax.print.attribute.standard.DateTimeAtCompleted;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,22 +29,36 @@ public class By3HoursController {
 	}
 	
 	public void setMainApp(MainApp mainApp){
-		this.mainApp = mainApp;
-		
-		
-		
-		
-		
-			
+		this.mainApp = mainApp;	
 		try {
 			//Populate VBOX
 			ObservableList<Node> forecasts = FXCollections.observableArrayList();
+			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("Blade.fxml"));
+
+			//Current weather
+			Label todayLabel = new Label("Today");
+			todayLabel.setAlignment(Pos.CENTER);
+			todayLabel.setFont(new Font("Arial", 24.0));
+			forecasts.add(todayLabel);
+			WeatherObject currentWeather = WeatherDataReader.getDataForNow();
+			Node thisBlade = (Node) loader.load();
+			BladeController cont = (BladeController) loader.getController();
+			DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+			Date timeNow = new Date();
+			String now = dateFormat.format(timeNow);
+			cont.instantiate(currentWeather.getTemp(),now,currentWeather.getIconURL(),currentWeather.getWindDegree(),currentWeather.getWindSpeed(),currentWeather.getDate());
+			
+			forecasts.add(thisBlade);
+			
+			//Allows us to read in another instance
+			loader.setRoot(null);
+			loader.setController(null);
+			
+			//By 3 hours data
 			boolean notFirst = false;
 			
 			//test value
 			//int total = 0;
-			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("Blade.fxml"));
-
 			for(List<WeatherObject> l : WeatherDataReader.getNextFiveDaysHourly()){
 				//Adds the correct week Day label
 				if (notFirst){
@@ -58,8 +77,8 @@ public class By3HoursController {
 					//Node thisBlade = (Node) loader.load();
 					
 					
-					Node thisBlade = (Node) loader.load();
-					BladeController cont = (BladeController) loader.getController();
+					thisBlade = (Node) loader.load();
+					cont = (BladeController) loader.getController();
 					cont.instantiate(w.getTemp(),w.getTime(),w.getIconURL(),w.getWindDegree(),w.getWindSpeed(),w.getDate());
 					
 					forecasts.add(thisBlade);
