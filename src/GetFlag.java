@@ -32,7 +32,7 @@ public class GetFlag{
 	        		}
 	        		else
 		        	{
-		        		throw new FlagNotFoundException("Can't find the flag colour!");
+		        		throw new FlagNotFoundException("Can't find the flag colour!!!");
 		        	}
 	        	}
 	        	
