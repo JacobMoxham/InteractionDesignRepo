@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -8,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -117,15 +119,18 @@ public class BladeController {
 	}
 	
 	// CHANGES THESE
-	private final double BIG_PICTURE_HEIGHT = 50.0;
-	private final double BLADE_HEIGHT = 20.0;
-	private final double LABEL_HEIGHT = 10.0;
+	private final double BIG_PICTURE_HEIGHT = 25.0;
+	private final double BLADE_HEIGHT = 9.1;
+	private final double LABEL_HEIGHT = 3.0;
 	
 	@FXML
 	public void bladePress() throws IOException {
 		if(clickable){
 			// get blade day
 			String dayText = day.getText();
+
+			// special case -- today (WARNING: UNREADABLE LINE OF CODE AHEAD :)))
+			dayText = dayText.toUpperCase().equals(LocalDate.now().getDayOfWeek().toString().substring(0, 3)) ? "Tod" : dayText;
 			
 			// switch to by 3 hours page
 			AnchorPane basePane = mainApp.showBy3Hours();
@@ -141,13 +146,20 @@ public class BladeController {
 			
 			// calculate correct y position
 			for (Node node : vbox.getChildren()) {
-				if (node.getClass() == ImageView.class) y += BLADE_HEIGHT;
-				else if (node.getClass() == Text.class) {
+				if (node.getClass() == ImageView.class) {
+
+				}
+				else if (node.getClass() == Label.class) {
 					// stop when at correct day
-					if (((Text) node).getText() == dayText) break;
+					if (((Label) node).getText().substring(0, 3).equals(dayText)) break;
+					System.out.println(((Label) node).getText().substring(0, 3));
+					System.out.println(dayText);
 					
 					y += LABEL_HEIGHT;
-				}	
+				} else {
+					System.out.println("flag encountered");
+					y += BLADE_HEIGHT;
+				}
 			}
 
 	        // scroll to correct location (scrolling values range from 0 to 1)
@@ -170,29 +182,22 @@ public class BladeController {
 	public void setClickable(boolean clickable) {
 		this.clickable = clickable;
 	}
-	//Handles swipes
+	
+	//Handles swipes (drags)
 	@FXML
 	private void handleDragAction(MouseEvent event) throws IOException {
 		
 		// ARBITRARY -- CHANGE IF REQUIRED
-		double minDragDistance = 64;
-		
-		
-		//System.out.println(event.getEventType());
-		
-		
+		double minDragDistance = 50;
 		
 		// record x on start of drag
 		if (event.getEventType().equals(MouseDragEvent.MOUSE_PRESSED)) {
-			System.out.println("DRAG START");
 			lastX = event.getScreenX();
 		} else
 		// determine whether to change screen or not on end of drag
 		if (event.getEventType().equals(MouseDragEvent.MOUSE_RELEASED)) {
-			System.out.println("DRAG END");
 			// calculate change in x over mouse drag
 			double deltaX = event.getScreenX() - lastX;
-			System.out.println("DELTAX:" + deltaX);
 			
 			// ignore if less than threshold
 			if (Math.abs(deltaX) < minDragDistance) return;
