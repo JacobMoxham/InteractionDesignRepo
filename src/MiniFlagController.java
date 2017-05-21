@@ -30,14 +30,9 @@ public class MiniFlagController {
 	
 	@FXML
 	private void handleButtonAction(ActionEvent event) throws IOException {
-	     Stage stage=null; 
-	     Parent root=null;
+	    
 	     if(event.getSource() == miniFlagInfoButton){   
-	    	 stage=(Stage) miniFlagInfoButton.getScene().getWindow();
-	    	 root = FXMLLoader.load(getClass().getResource("FlagsInfoScreen.fxml"));
-		     Scene scene = new Scene(root);
-		     stage.setScene(scene);
-		     stage.show();
+	    	 mainApp.showFlagsInfo();
 	     }
 	     else
 	     {
