@@ -17,10 +17,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 public class By3HoursController {
+	
 	@FXML
 	private VBox weatherForecasts;
 	
@@ -34,8 +37,8 @@ public class By3HoursController {
 	private void initialise(){
 	}
 	
-	public void setMainApp(SplashScreenApp mainApp){
-		this.mainApp = mainApp;	
+	public void setMainApp(SplashScreenApp splashScreenApp){
+		this.mainApp = splashScreenApp;	
 		try {
 		
 			//Populate VBOX
@@ -79,6 +82,7 @@ public class By3HoursController {
 			WeatherObject currentWeather = WeatherDataReader.getDataForNow();
 			Node thisBlade = (Node) bladeLoader.load();
 			BladeController cont = (BladeController) bladeLoader.getController();
+			cont.setMainApp(mainApp);
 			DateFormat dateFormat = new SimpleDateFormat("HH:mm");
 			Date timeNow = new Date();
 			String now = dateFormat.format(timeNow);
@@ -148,6 +152,7 @@ public class By3HoursController {
 		
 		
 	}
+
 }
 
 

@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -18,7 +20,8 @@ import javafx.util.converter.TimeStringConverter;
 public class BladeController {
 	
 	private boolean clickable;
-	
+	//Tracks swipe starts
+	private double lastX;
 	@FXML
 	private ImageView windImageObj;
 	@FXML
@@ -166,5 +169,55 @@ public class BladeController {
 
 	public void setClickable(boolean clickable) {
 		this.clickable = clickable;
+	}
+	//Handles swipes
+	@FXML
+	private void handleDragAction(MouseEvent event) throws IOException {
+		
+		// ARBITRARY -- CHANGE IF REQUIRED
+		double minDragDistance = 64;
+		
+		
+		//System.out.println(event.getEventType());
+		
+		
+		
+		// record x on start of drag
+		if (event.getEventType().equals(MouseDragEvent.MOUSE_PRESSED)) {
+			System.out.println("DRAG START");
+			lastX = event.getScreenX();
+		} else
+		// determine whether to change screen or not on end of drag
+		if (event.getEventType().equals(MouseDragEvent.MOUSE_RELEASED)) {
+			System.out.println("DRAG END");
+			// calculate change in x over mouse drag
+			double deltaX = event.getScreenX() - lastX;
+			System.out.println("DELTAX:" + deltaX);
+			
+			// ignore if less than threshold
+			if (Math.abs(deltaX) < minDragDistance) return;
+			
+			// determine if user is scrolling right (+ve)
+			boolean isScrollLeft = (deltaX >= 0);
+		     
+		    System.out.println(""); 
+	    	if (isScrollLeft){
+	    		if (mainApp.isBy3Hours()){
+	    			mainApp.showBasicFrame();
+	    		}else{
+	    			mainApp.showBy3Hours();
+	    		}
+	    		
+	    	}else{
+	    		if (mainApp.isBy3Hours()){
+	    			mainApp.showByDay();
+	    		}else{
+	    			return;
+	    		}
+	    	}
+
+           
+		}
+		
 	}
 }
