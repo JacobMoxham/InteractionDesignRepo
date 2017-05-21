@@ -119,9 +119,9 @@ public class BladeController {
 	}
 	
 	// CHANGES THESE
-	private final double BIG_PICTURE_HEIGHT = 25.0;
-	private final double BLADE_HEIGHT = 9.1;
-	private final double LABEL_HEIGHT = 3.0;
+	private final double FLAG_HEIGHT = 100.0;
+	private final double BLADE_HEIGHT = 104.2;
+	private final double LABEL_HEIGHT = 34.5;
 	
 	@FXML
 	public void bladePress() throws IOException {
@@ -142,31 +142,34 @@ public class BladeController {
 			// get vbox (where flags and labels are stored
 			VBox vbox = (VBox) ((AnchorPane) flagScroll.getContent()).getChildren().get(0);
 			
-			double y = BIG_PICTURE_HEIGHT;
+			double y = FLAG_HEIGHT;
+			boolean isFirstNode = true;
 			
 			// calculate correct y position
 			for (Node node : vbox.getChildren()) {
-				if (node.getClass() == ImageView.class) {
-
+				// exclude flag from calculation
+				if (isFirstNode) {
+					isFirstNode = false;
+					continue;
+				}
+				
+				if (node.getClass() == AnchorPane.class) {
+					y += BLADE_HEIGHT;
+					System.out.println("blade");
 				}
 				else if (node.getClass() == Label.class) {
 					// stop when at correct day
 					if (((Label) node).getText().substring(0, 3).equals(dayText)) break;
-					System.out.println(((Label) node).getText().substring(0, 3));
-					System.out.println(dayText);
-					
+					System.out.println("label");
 					y += LABEL_HEIGHT;
-				} else {
-					System.out.println("flag encountered");
-					y += BLADE_HEIGHT;
 				}
 			}
 
 	        // scroll to correct location (scrolling values range from 0 to 1)
 	        double height = flagScroll.getContent().getBoundsInLocal().getHeight();
-	        flagScroll.setVvalue(y/height);
+	        
+	        ((ScrollPane) childNodes.get(1)).setVvalue(y/height);
 
-	        // just for usability
 	        flagScroll.requestFocus();
 		}
 	}

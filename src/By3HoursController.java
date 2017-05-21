@@ -1,14 +1,12 @@
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class By3HoursController {
 	
 	@FXML
 	private VBox weatherForecasts;
-	
-	@FXML
-	private ScrollPane flagScroll;
 	
 	//Reference to application
 	private SplashScreenApp mainApp;
