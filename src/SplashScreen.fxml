@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -51,5 +52,12 @@
          </font>
       </Label>
       <ImageView fx:id="weatherImageView" fitHeight="108.0" fitWidth="152.0" layoutX="211.0" layoutY="362.0" onMousePressed="#handleDragAction" onMouseReleased="#handleDragAction" pickOnBounds="true" preserveRatio="true" />
+      <Pane layoutX="-5.0" layoutY="522.0" prefHeight="88.0" prefWidth="363.0">
+         <children>
+            <Circle layoutX="142.0" layoutY="44.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle layoutX="192.0" layoutY="44.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle layoutX="232.0" layoutY="44.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
