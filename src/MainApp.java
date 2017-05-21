@@ -44,12 +44,12 @@ public class MainApp extends Application {
 	}
 	 public void showBasicFrame() {
 	        try {
-	            // Load person overview.
+	            
 	            FXMLLoader loader = new FXMLLoader();
 	            loader.setLocation(MainApp.class.getResource("BasicFrame.fxml"));
 	            AnchorPane basicView = (AnchorPane) loader.load();
 
-	            // Set person overview into the center of root layout.
+	            // Set basic view into the center of root layout.
 	            rootLayout.setCenter(basicView);
 	            
 	            

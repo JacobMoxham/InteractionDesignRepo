@@ -24,14 +24,14 @@ public class By3HoursController {
 	private VBox weatherForecasts;
 	
 	//Reference to application
-	private MainApp mainApp;
+	private SplashScreenApp mainApp;
 	
 	@FXML
 	private void initialise(){
 	}
 	
-	public void setMainApp(MainApp mainApp){
-		this.mainApp = mainApp;	
+	public void setMainApp(SplashScreenApp splashScreenApp){
+		this.mainApp = splashScreenApp;	
 		try {
 		
 			//Populate VBOX
@@ -139,4 +139,5 @@ public class By3HoursController {
 		
 		
 	}
+
 }

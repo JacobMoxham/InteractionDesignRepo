@@ -12,11 +12,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.SwipeEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class SplashScreenController implements Initializable {
+	
+	//stores last mouse position
+	private double lastX;
+	
+	//Reference to application
+	private SplashScreenApp mainApp;
 	
 	@FXML
 	private Button splashScreenInfoButton;
@@ -46,8 +54,8 @@ public class SplashScreenController implements Initializable {
 	     Stage stage=null; 
 	     Parent root=null;
 	     if(event.getSource() == splashScreenInfoButton){   
-	        stage=(Stage) splashScreenInfoButton.getScene().getWindow();
-	        root = FXMLLoader.load(getClass().getResource("FlagsInfoScreen.fxml"));
+	    	 stage=(Stage) splashScreenInfoButton.getScene().getWindow();
+	    	 root = FXMLLoader.load(getClass().getResource("FlagsInfoScreen.fxml"));
 		     Scene scene = new Scene(root);
 		     stage.setScene(scene);
 		     stage.show();
@@ -126,9 +134,46 @@ public class SplashScreenController implements Initializable {
 		
 		setData(); // Set Data in splash screen
 	}
-
-
-
-	
+	//Handles swipes
+	@FXML
+	private void handleDragAction(MouseEvent event) throws IOException {
+		
+		// ARBITRARY -- CHANGE IF REQUIRED
+		double minDragDistance = 64;
+		
+		
+		//System.out.println(event.getEventType());
+		
+		// record x on start of drag
+		if (event.getEventType().equals(MouseDragEvent.MOUSE_PRESSED)) {
+			System.out.println("DRAG START");
+			lastX = event.getScreenX();
+		} else
+		// determine whether to change screen or not on end of drag
+		if (event.getEventType().equals(MouseDragEvent.MOUSE_RELEASED)) {
+			System.out.println("DRAG END");
+			// calculate change in x over mouse drag
+			double deltaX = event.getScreenX() - lastX;
+			System.out.println("DELTAX:" + deltaX);
+			
+			// ignore if less than threshold
+			if (Math.abs(deltaX) < minDragDistance) return;
+			
+			// determine if user is scrolling right (-ve)
+			boolean isScrollLeft = (deltaX <= 0);
+		     
+		    System.out.println(""); 
+		    // only go to screen 2 if swiping right
+	    	if (isScrollLeft) return;
+	 	     
+	 	    //Show by3Hours view
+	 	    mainApp.showBy3Hours();
+           
+		}
+		
+	}
+	public void setMainApp(SplashScreenApp splashScreenApp){
+		this.mainApp = splashScreenApp;
+	}
 	
 }

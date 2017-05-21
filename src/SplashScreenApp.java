@@ -46,11 +46,27 @@ public class SplashScreenApp extends Application {
 	        }
 	}
 	 public void showBasicFrame() throws IOException {
-	        // Load person overview.
+	        // Load splash screen
 			FXMLLoader loader = new FXMLLoader();
-          loader.setLocation(SplashScreenApp.class.getResource("SplashScreen.fxml"));
+			loader.setLocation(SplashScreenApp.class.getResource("SplashScreen.fxml"));
 			AnchorPane basicView = (AnchorPane) loader.load();
 			rootLayout.setCenter(basicView);
+			SplashScreenController ssc = (SplashScreenController) loader.getController();
+			ssc.setMainApp(this);
+	    }
+	 	public void showBy3Hours() throws IOException {
+	 		 FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("BasicFrame.fxml"));
+            AnchorPane basicView = (AnchorPane) loader.load();
+
+            // Set basic view into the center of root layout.
+            rootLayout.setCenter(basicView);
+            
+            
+            //Give controller access to the main app
+            By3HoursController controller = loader.getController();
+            controller.setMainApp(this);
+			
 	    }
 	 
 	    /**

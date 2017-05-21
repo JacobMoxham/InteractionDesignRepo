@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
-<?import com.jfoenix.controls.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SplashScreenController">
+<AnchorPane fx:id="anchor2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SplashScreenController">
    <children>
-   <ImageView fitHeight="630.0" fitWidth="851.0" layoutX="-304.0" layoutY="-15.0">
+   <ImageView fitHeight="630.0" fitWidth="851.0" layoutX="-304.0" layoutY="-15.0" onMousePressed="#handleDragAction" onMouseReleased="#handleDragAction">
          <image>
             <Image url="@1280px-Churchill_College_Boat_Club_Lent_Bumps_2008_M4.JPG" />
          </image>
       </ImageView>
-   <ImageView fx:id="imageView">
+   <ImageView fx:id="imageView" onMouseMoved="#handleDragAction" onMousePressed="#handleDragAction">
          <image>
             <Image url="@flagred.png" />
          </image></ImageView>
@@ -29,12 +29,12 @@
             <Font size="34.0" />
          </font>
       </Label>
-      <ImageView fx:id="windImageView" fitHeight="108.0" fitWidth="152.0" layoutX="201.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="windImageView" fitHeight="108.0" fitWidth="152.0" layoutX="201.0" layoutY="263.0" onMousePressed="#handleDragAction" onMouseReleased="#handleDragAction" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="speedWindLabel" layoutX="245.0" layoutY="290.0" text="5">
          <font>
             <Font size="38.0" />
          </font>
       </Label>
-      <ImageView fx:id="weatherImageView" fitHeight="108.0" fitWidth="152.0" layoutX="211.0" layoutY="362.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="weatherImageView" fitHeight="108.0" fitWidth="152.0" layoutX="211.0" layoutY="362.0" onMousePressed="#handleDragAction" onMouseReleased="#handleDragAction" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
