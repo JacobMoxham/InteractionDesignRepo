@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import javafx.scene.Node;
@@ -17,13 +16,14 @@ import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.util.converter.TimeStringConverter;
 
 public class BladeController {
+	//Tracks if this blade can be clicked
 	private boolean clickable;
 	//Tracks swipe starts
 	private double lastX;
+	
+	//Holds references to the fxml objects
 	@FXML
 	private ImageView windImageObj;
 	@FXML
@@ -41,6 +41,8 @@ public class BladeController {
 	@FXML
 	private ImageView bladeImage;
 	
+	
+	//Holds data for the fxml objects
 	@FXML
 	private StringProperty windDegreeString = new SimpleStringProperty();
 	@FXML
@@ -65,28 +67,7 @@ public class BladeController {
 	public BladeController(){
 		
 	}
-	/*
-	 * Method for instantiation changed for efficiency
-	 * 
-	public BladeController(String temp,String time,String iconURL,String windDegree,String windSpeed,String date,Boolean clickable){
-		//Set string variables
-		timeString.set(time);
-		weatherImage.set(iconURL);
-		degreesString.set(temp);
-		dayString.set(date);
-		windText.set(windSpeed);
-		windDegreeString.set(windDegree);
-		this.clickable = clickable;
-		if (clickable){
-			bladeString.set("500px-Rowing_Tan.png");
-		}else{
-			bladeString.set("500px-Rowing_Blade_Cambridge Blue.png");
-		}
-	}
-	
-	public BladeController(String temp,String time,String iconURL,String windDegree,String windSpeed,String date){
-		this(temp,time,iconURL,windDegree,windSpeed,date,false);
-	}*/
+
 	public void instantiate(String temp,String time,String iconURL,String windDegree,String windSpeed,String date,Boolean clickable){
 		//Set string variables
 		timeString.set(time);
@@ -96,6 +77,7 @@ public class BladeController {
 		windText.set(windSpeed);
 		windDegreeString.set(windDegree);
 		this.clickable = clickable;
+		//Sets colour based on if it is clickable
 		if (clickable){
 			bladeString.set("500px-Rowing_Tan.png");
 		}else{
@@ -118,7 +100,7 @@ public class BladeController {
 		instantiate(temp,time,iconURL,windDegree,windSpeed,date,false);
 	}
 	
-	// CHANGES THESE
+	// CHANGE THESE to fit the size of components used
 	private final double BIG_PICTURE_HEIGHT = 25.0;
 	private final double BLADE_HEIGHT = 9.1;
 	private final double LABEL_HEIGHT = 3.0;
@@ -157,7 +139,7 @@ public class BladeController {
 					
 					y += LABEL_HEIGHT;
 				} else {
-					System.out.println("flag encountered");
+					System.out.println("blade encountered");
 					y += BLADE_HEIGHT;
 				}
 			}
@@ -207,6 +189,7 @@ public class BladeController {
 		     
 		    System.out.println(""); 
 	    	if (isScrollLeft){
+	    		System.out.println("left");
 	    		if (mainApp.isBy3Hours()){
 	    			mainApp.showBasicFrame();
 	    		}else{
@@ -214,9 +197,6 @@ public class BladeController {
 	    		}
 	    		
 	    	}else{
-	    		if(mainApp == null){
-	    			System.out.println("gotcha");
-	    		}
 	    		if (mainApp.isBy3Hours()){
 	    			mainApp.showByDay();
 	    		}else{
