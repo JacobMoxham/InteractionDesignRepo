@@ -45,7 +45,7 @@
          </effect>
       </Label>
       <ImageView fx:id="windImageView" fitHeight="108.0" fitWidth="152.0" layoutX="201.0" layoutY="263.0" onMousePressed="#handleDragAction" onMouseReleased="#handleDragAction" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="speedWindLabel" layoutX="235.0" layoutY="290.0" text="5" textAlignment="CENTER">
+      <Label fx:id="speedWindLabel" layoutX="236.0" layoutY="290.0" text="5" textAlignment="CENTER">
          <font>
             <Font size="38.0" />
          </font>
