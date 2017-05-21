@@ -107,6 +107,7 @@ public class By3HoursController {
 					
 					thisBlade = (Node) bladeLoader.load();
 					todayController = (BladeController) bladeLoader.getController();
+					todayController.setMainApp(mainApp);
 					todayController.instantiate(w.getTemp(),w.getTime(),w.getIconURL(),w.getWindDegree(),w.getWindSpeed(),w.getDate());
 					
 					forecasts.add(thisBlade);

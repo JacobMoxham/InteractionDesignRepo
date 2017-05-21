@@ -53,14 +53,8 @@ public class SplashScreenController implements Initializable {
 	
 	@FXML
 	private void handleButtonAction(ActionEvent event) throws IOException {
-	     Stage stage=null; 
-	     Parent root=null;
 	     if(event.getSource() == splashScreenInfoButton){   
-	    	 stage=(Stage) splashScreenInfoButton.getScene().getWindow();
-	    	 root = FXMLLoader.load(getClass().getResource("FlagsInfoScreen.fxml"));
-		     Scene scene = new Scene(root);
-		     stage.setScene(scene);
-		     stage.show();
+	    	 mainApp.showFlagsInfo();
 	     }
 	     else
 	     {
