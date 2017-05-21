@@ -45,7 +45,7 @@ public class BladeController {
 	private StringProperty bladeString = new SimpleStringProperty();
 	
 	//Reference to application
-	private MainApp mainApp;
+	private SplashScreenApp mainApp;
 	
 	public void initialize(){
 		
@@ -111,7 +111,7 @@ public class BladeController {
 		}
 	}
 	
-	public void setMainApp(MainApp mainApp){
+	public void setMainApp(SplashScreenApp mainApp){
 		this.mainApp = mainApp;
 	}
 
