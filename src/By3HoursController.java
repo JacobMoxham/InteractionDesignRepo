@@ -50,6 +50,7 @@ public class By3HoursController {
 			try{
 				Node miniflag = (Node) miniflagLoader.load();
 				MiniFlagController miniflagController = (MiniFlagController) miniflagLoader.getController();
+				miniflagController.setMainApp(mainApp);
 				Flag flag = GetFlag.FlagColour();
 												
 				miniflagController.instantiate(flag);
