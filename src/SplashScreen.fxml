@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="anchor2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SplashScreenController">
+   <children>
+   <ImageView fitHeight="630.0" fitWidth="851.0" layoutX="-304.0" layoutY="-15.0">
+         <image>
+            <Image url="@1280px-Churchill_College_Boat_Club_Lent_Bumps_2008_M4.JPG" />
+         </image>
+      </ImageView>
+   <ImageView fx:id="imageView">
+         <image>
+            <Image url="@flagred.png" />
+         </image></ImageView>
+      <Button fx:id="splashScreenInfoButton" layoutX="253.0" layoutY="188.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="17.0" prefWidth="47.0" text="Info" />
+      <Label fx:id="timeLabel" layoutX="108.0" layoutY="294.0" text="12:00" textFill="WHITE">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+      <Label fx:id="tempLabel" layoutX="108.0" layoutY="396.0" text="8" textFill="WHITE">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="windImageView" fitHeight="108.0" fitWidth="152.0" layoutX="201.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="speedWindLabel" layoutX="245.0" layoutY="290.0" text="5">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="weatherImageView" fitHeight="108.0" fitWidth="152.0" layoutX="211.0" layoutY="362.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
