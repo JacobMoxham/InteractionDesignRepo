@@ -1,10 +1,17 @@
+import java.io.IOException;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.converter.TimeStringConverter;
 
@@ -104,10 +111,48 @@ public class BladeController {
 	public void instantiate(String temp,String time,String iconURL,String windDegree,String windSpeed,String date){
 		instantiate(temp,time,iconURL,windDegree,windSpeed,date,false);
 	}
+	
+	// CHANGES THESE
+	private final double BIG_PICTURE_HEIGHT = 0.0;
+	private final double FLAG_HEIGHT = 0.0;
+	private final double LABEL_HEIGHT = 0.0;
+	
 	@FXML
-	public void bladePress(){
+	public void bladePress() throws IOException {
 		if(clickable){
-			System.out.println("click");
+			// get blade day
+			String dayText = day.getText();
+			
+			// switch to by 3 hours page
+			AnchorPane basePane = mainApp.showBy3Hours();
+			
+			// get flag scroll object
+			ObservableList<Node> childNodes = basePane.getChildren();
+			ScrollPane flagScroll = null;
+			for (Node node : childNodes) if (node.getId() == "flagScroll") flagScroll = (ScrollPane) node;
+			
+			// get vbox (where flags and labels are stored
+			VBox vbox = (VBox) ((AnchorPane) flagScroll.getChildrenUnmodifiable().get(0)).getChildren().get(0);
+			
+			double y = BIG_PICTURE_HEIGHT;
+			
+			// calculate correct y position
+			for (Node node : vbox.getChildren()) {
+				if (node.getClass() == ImageView.class) y += FLAG_HEIGHT;
+				else if (node.getClass() == Text.class) {
+					// stop when at correct day
+					if (((Text) node).getText() == dayText) break;
+					
+					y += LABEL_HEIGHT;
+				}	
+			}
+
+	        // scroll to correct location (scrolling values range from 0 to 1)
+	        double height = flagScroll.getContent().getBoundsInLocal().getHeight();
+	        flagScroll.setVvalue(y/height);
+
+	        // just for usability
+	        flagScroll.requestFocus();
 		}
 	}
 	
