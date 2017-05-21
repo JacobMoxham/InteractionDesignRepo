@@ -240,7 +240,7 @@ public class SplashScreenApp extends Application {
 				Node thisBlade = (Node) loader.load();
 				BladeController cont = (BladeController) loader.getController();
 				cont.setMainApp(this);
-				cont.instantiate(w.getTemp(),w.getTime(),w.getIconURL(),w.getWindDegree(),w.getWindSpeed(),w.getDate(),clickable);
+				cont.instantiate(w.getTemp(),"",w.getIconURL(),w.getWindDegree(),w.getWindSpeed(),w.getDate(),clickable);
 				
 				dayForecasts.add(thisBlade);
 				
