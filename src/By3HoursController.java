@@ -82,6 +82,7 @@ public class By3HoursController {
 			WeatherObject currentWeather = WeatherDataReader.getDataForNow();
 			Node thisBlade = (Node) bladeLoader.load();
 			BladeController cont = (BladeController) bladeLoader.getController();
+			cont.setMainApp(mainApp);
 			DateFormat dateFormat = new SimpleDateFormat("HH:mm");
 			Date timeNow = new Date();
 			String now = dateFormat.format(timeNow);
@@ -120,15 +121,15 @@ public class By3HoursController {
 					//Node thisBlade = (Node) loader.load();
 					
 					
-					thisBlade = (Node) loader.load();
-					cont = (BladeController) loader.getController();
+					thisBlade = (Node) bladeLoader.load();
+					cont = (BladeController) bladeLoader.getController();
 					cont.instantiate(w.getTemp(),w.getTime(),w.getIconURL(),w.getWindDegree(),w.getWindSpeed(),w.getDate());
 					
 					forecasts.add(thisBlade);
 					
 					//Allows us to read in another instance
-					loader.setRoot(null);
-					loader.setController(null);
+					bladeLoader.setRoot(null);
+					bladeLoader.setController(null);
 					//total++;
 				}
 			}

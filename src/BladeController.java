@@ -12,13 +12,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.converter.TimeStringConverter;
 
 public class BladeController {
 	
 	private boolean clickable;
-	
+	//Tracks swipe starts
+	private double lastX;
 	@FXML
 	private ImageView windImageObj;
 	@FXML
@@ -176,6 +179,7 @@ public class BladeController {
 		
 		
 		//System.out.println(event.getEventType());
+		
 		
 		
 		// record x on start of drag

@@ -67,8 +67,24 @@ public class SplashScreenApp extends Application {
             //Give controller access to the main app
             By3HoursController controller = loader.getController();
             controller.setMainApp(this);
-			
+			by3Hours = true;
             return basicView;
+	    }
+	 	public AnchorPane showByDay() throws IOException {
+	 		FXMLLoader loader = new FXMLLoader();
+	 		loader.setLocation(MainApp.class.getResource("ByDay.fxml"));
+	 		AnchorPane basicView = (AnchorPane) loader.load();
+
+	 		// Set basic view into the center of root layout.
+	 		rootLayout.setCenter(basicView);
+           
+           
+	 		//Give controller access to the main app
+	 		ByDayController controller = loader.getController();
+	 		controller.setMainApp(this);
+			by3Hours = false;
+
+	 		return basicView;
 	    }
 	 
 	    /**
@@ -82,5 +98,13 @@ public class SplashScreenApp extends Application {
 	    public static void main(String[] args) {
 	        launch(args);
 	    }
+
+		public boolean isBy3Hours() {
+			return by3Hours;
+		}
+
+		public void setBy3Hours(boolean by3Hours) {
+			this.by3Hours = by3Hours;
+		}
 
 }

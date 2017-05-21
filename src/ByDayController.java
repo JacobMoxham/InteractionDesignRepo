@@ -26,13 +26,13 @@ public class ByDayController {
 	private VBox weatherForecasts;
 	
 	//Reference to application
-	private MainApp mainApp;
+	private SplashScreenApp mainApp;
 	
 	@FXML
 	private void initialise(){
 	}
 	
-	public void setMainApp(MainApp mainApp){
+	public void setMainApp(SplashScreenApp mainApp){
 		this.mainApp = mainApp;	
 		try {
 			//Populate VBOX
@@ -54,6 +54,7 @@ public class ByDayController {
 				
 				Node thisBlade = (Node) loader.load();
 				BladeController cont = (BladeController) loader.getController();
+				cont.setMainApp(mainApp);
 				cont.instantiate(w.getTemp(),w.getTime(),w.getIconURL(),w.getWindDegree(),w.getWindSpeed(),w.getDate(),clickable);
 				
 				forecasts.add(thisBlade);
