@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="93.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="93.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MiniFlagController">
    <children>
       <GridPane prefHeight="93.0" prefWidth="340.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -27,8 +27,8 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fitHeight="94.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Anyone can row" wrappingWidth="235.13671875" GridPane.columnIndex="1">
+            <ImageView fx:id="flagObj" fitHeight="94.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true" />
+            <Text fx:id="flagTextObj" strokeType="OUTSIDE" strokeWidth="0.0" text="Anyone can row" wrappingWidth="235.13671875" GridPane.columnIndex="1">
                <font>
                   <Font size="24.0" />
                </font>

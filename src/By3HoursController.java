@@ -46,47 +46,35 @@ public class By3HoursController {
 			FXMLLoader bladeLoader = new FXMLLoader(MainApp.class.getResource("Blade.fxml"));
 			FXMLLoader miniflagLoader = new FXMLLoader(MainApp.class.getResource("MiniFlag.fxml"));
 			
+			//Add miniflag to top
 			try{
-				//Gets the current flag colour
+				Node miniflag = (Node) miniflagLoader.load();
+				MiniFlagController miniflagController = (MiniFlagController) miniflagLoader.getController();
 				Flag flag = GetFlag.FlagColour();
-				Image flagImg=null;
-				switch (flag) {
-					case GREEN:
-						flagImg = new Image("flaggreensmall.png");
-						break;
-					case YELLOW:
-						flagImg = new Image("flagyellowsmall.png");
-						break;
-					case REDYELLOW:
-						flagImg = new Image("flagyellowredsmall.png");
-						break;
-					case RED:
-						flagImg = new Image("flagredsmall.png");
-						break;
-					case NOTOPERATIONAL:
-						//TODO: handle this case
-						break;
-				}
-				forecasts.add(new ImageView(flagImg));
-					
+												
+				miniflagController.instantiate(flag);
+				forecasts.add(miniflag);
 			}catch (FlagNotFoundException f){
 				System.out.println("Flag not found");
 				f.printStackTrace();
 			}
 			
 			//Current weather
+			//"Today"
 			Label todayLabel = new Label("Today");
 			todayLabel.setAlignment(Pos.CENTER);
 			todayLabel.setFont(new Font("Arial", 24.0));
 			forecasts.add(todayLabel);
+			
+			//Blade with current weather
 			WeatherObject currentWeather = WeatherDataReader.getDataForNow();
 			Node thisBlade = (Node) bladeLoader.load();
-			BladeController cont = (BladeController) bladeLoader.getController();
-			cont.setMainApp(mainApp);
+			BladeController todayController = (BladeController) bladeLoader.getController();
+			todayController.setMainApp(mainApp);
 			DateFormat dateFormat = new SimpleDateFormat("HH:mm");
 			Date timeNow = new Date();
 			String now = dateFormat.format(timeNow);
-			cont.instantiate(currentWeather.getTemp(),now,currentWeather.getIconURL(),currentWeather.getWindDegree(),currentWeather.getWindSpeed(),currentWeather.getDate());
+			todayController.instantiate(currentWeather.getTemp(),now,currentWeather.getIconURL(),currentWeather.getWindDegree(),currentWeather.getWindSpeed(),currentWeather.getDate());
 			
 			forecasts.add(thisBlade);
 			
@@ -96,10 +84,6 @@ public class By3HoursController {
 			
 			//By 3 hours data
 			boolean notFirst = false;
-			
-			//Add miniflag to top
-			//miniflag = (Node) miniflagLoader.load();
-
 			
 			//test value
 			//int total = 0;
