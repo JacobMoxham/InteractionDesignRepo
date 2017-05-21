@@ -39,7 +39,9 @@ public class By3HoursController {
 		
 			//Populate VBOX
 			ObservableList<Node> forecasts = FXCollections.observableArrayList();
-			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("Blade.fxml"));
+			FXMLLoader bladeLoader = new FXMLLoader(MainApp.class.getResource("Blade.fxml"));
+			FXMLLoader miniflagLoader = new FXMLLoader(MainApp.class.getResource("MiniFlag.fxml"));
+			
 			try{
 				//Gets the current flag colour
 				Flag flag = GetFlag.FlagColour();
@@ -74,9 +76,8 @@ public class By3HoursController {
 			todayLabel.setFont(new Font("Arial", 24.0));
 			forecasts.add(todayLabel);
 			WeatherObject currentWeather = WeatherDataReader.getDataForNow();
-			Node thisBlade = (Node) loader.load();
-			BladeController cont = (BladeController) loader.getController();
-			cont.setMainApp(mainApp);
+			Node thisBlade = (Node) bladeLoader.load();
+			BladeController cont = (BladeController) bladeLoader.getController();
 			DateFormat dateFormat = new SimpleDateFormat("HH:mm");
 			Date timeNow = new Date();
 			String now = dateFormat.format(timeNow);
@@ -85,11 +86,15 @@ public class By3HoursController {
 			forecasts.add(thisBlade);
 			
 			//Allows us to read in another instance
-			loader.setRoot(null);
-			loader.setController(null);
+			bladeLoader.setRoot(null);
+			bladeLoader.setController(null);
 			
 			//By 3 hours data
 			boolean notFirst = false;
+			
+			//Add miniflag to top
+			//miniflag = (Node) miniflagLoader.load();
+
 			
 			//test value
 			//int total = 0;
@@ -136,7 +141,10 @@ public class By3HoursController {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
+		
+			
+		
 		
 	}
 
