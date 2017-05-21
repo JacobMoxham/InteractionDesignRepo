@@ -208,6 +208,9 @@ public class BladeController {
 	    		}
 	    		
 	    	}else{
+	    		if(mainApp == null){
+	    			System.out.println("gotcha");
+	    		}
 	    		if (mainApp.isBy3Hours()){
 	    			mainApp.showByDay();
 	    		}else{
