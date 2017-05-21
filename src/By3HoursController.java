@@ -16,10 +16,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 public class By3HoursController {
+	
 	@FXML
 	private VBox weatherForecasts;
 	
@@ -37,7 +40,6 @@ public class By3HoursController {
 			//Populate VBOX
 			ObservableList<Node> forecasts = FXCollections.observableArrayList();
 			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("Blade.fxml"));
-			
 			try{
 				//Gets the current flag colour
 				Flag flag = GetFlag.FlagColour();
@@ -74,6 +76,7 @@ public class By3HoursController {
 			WeatherObject currentWeather = WeatherDataReader.getDataForNow();
 			Node thisBlade = (Node) loader.load();
 			BladeController cont = (BladeController) loader.getController();
+			cont.setMainApp(mainApp);
 			DateFormat dateFormat = new SimpleDateFormat("HH:mm");
 			Date timeNow = new Date();
 			String now = dateFormat.format(timeNow);
@@ -133,10 +136,7 @@ public class By3HoursController {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-			
-		
+		}	
 		
 	}
 

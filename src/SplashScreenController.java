@@ -159,8 +159,8 @@ public class SplashScreenController implements Initializable {
 			// ignore if less than threshold
 			if (Math.abs(deltaX) < minDragDistance) return;
 			
-			// determine if user is scrolling right (-ve)
-			boolean isScrollLeft = (deltaX <= 0);
+			// determine if user is scrolling right (+ve)
+			boolean isScrollLeft = (deltaX >= 0);
 		     
 		    System.out.println(""); 
 		    // only go to screen 2 if swiping right
