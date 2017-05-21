@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="600.0" maxWidth="350.0" minHeight="600.0" minWidth="350.0" prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ByDayController">
    <children>
-      <ImageView fitHeight="630.0" fitWidth="851.0" layoutX="-304.0" layoutY="-15.0">
+      <ImageView fitHeight="630.0" fitWidth="851.0" layoutX="-292.0" layoutY="-15.0">
          <image>
             <Image url="@1280px-Churchill_College_Boat_Club_Lent_Bumps_2008_M4.JPG" />
          </image>
@@ -29,9 +29,9 @@
       </ScrollPane>
       <Pane layoutX="-126.0" layoutY="528.0" prefHeight="72.0" prefWidth="597.0">
          <children>
-            <Circle layoutX="358.0" layoutY="39.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle layoutX="298.0" layoutY="39.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle layoutX="248.0" layoutY="39.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle layoutX="358.0" layoutY="39.0" opacity="0.2" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle layoutX="298.0" layoutY="39.0" opacity="0.2" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle layoutX="248.0" layoutY="39.0" opacity="0.2" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
    </children>

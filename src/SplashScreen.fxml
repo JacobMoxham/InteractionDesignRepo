@@ -16,7 +16,7 @@
 
 <AnchorPane fx:id="anchor2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SplashScreenController">
    <children>
-   <ImageView fitHeight="630.0" fitWidth="851.0" layoutX="-304.0" layoutY="-15.0" onMousePressed="#handleDragAction" onMouseReleased="#handleDragAction">
+   <ImageView fitHeight="630.0" fitWidth="851.0" layoutX="-207.0" layoutY="-15.0" onMousePressed="#handleDragAction" onMouseReleased="#handleDragAction">
          <image>
             <Image url="@1280px-Churchill_College_Boat_Club_Lent_Bumps_2008_M4.JPG" />
          </image>
@@ -54,9 +54,9 @@
       <ImageView fx:id="weatherImageView" fitHeight="108.0" fitWidth="152.0" layoutX="211.0" layoutY="362.0" onMousePressed="#handleDragAction" onMouseReleased="#handleDragAction" pickOnBounds="true" preserveRatio="true" />
       <Pane layoutX="-5.0" layoutY="522.0" prefHeight="88.0" prefWidth="363.0">
          <children>
-            <Circle layoutX="142.0" layoutY="44.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle layoutX="192.0" layoutY="44.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle layoutX="232.0" layoutY="44.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle layoutX="142.0" layoutY="44.0" opacity="0.2" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle layoutX="192.0" layoutY="44.0" opacity="0.2" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle layoutX="232.0" layoutY="44.0" opacity="0.2" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
       <Label fx:id="splashFlagInfo" layoutX="29.0" layoutY="80.0" prefHeight="101.0" prefWidth="292.0" text="TEXT" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
