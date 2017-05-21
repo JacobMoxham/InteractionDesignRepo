@@ -70,7 +70,7 @@ public class By3HoursController {
 			WeatherObject currentWeather = WeatherDataReader.getDataForNow();
 			Node thisBlade = (Node) bladeLoader.load();
 			BladeController todayController = (BladeController) bladeLoader.getController();
-			cont.setMainApp(mainApp);
+			todayController.setMainApp(mainApp);
 			DateFormat dateFormat = new SimpleDateFormat("HH:mm");
 			Date timeNow = new Date();
 			String now = dateFormat.format(timeNow);

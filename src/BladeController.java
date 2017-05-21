@@ -5,23 +5,17 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-<<<<<<< HEAD
 import javafx.scene.text.Text;
-=======
 import javafx.scene.Node;
->>>>>>> branch 'master' of https://github.com/JacobMoxham/InteractionDesignRepo
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-<<<<<<< HEAD
-=======
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
->>>>>>> branch 'master' of https://github.com/JacobMoxham/InteractionDesignRepo
 import javafx.util.converter.TimeStringConverter;
 
 public class BladeController {
@@ -122,14 +116,11 @@ public class BladeController {
 		instantiate(temp,time,iconURL,windDegree,windSpeed,date,false);
 	}
 	
-<<<<<<< HEAD
-=======
 	// CHANGES THESE
 	private final double BIG_PICTURE_HEIGHT = 50.0;
 	private final double BLADE_HEIGHT = 20.0;
 	private final double LABEL_HEIGHT = 10.0;
 	
->>>>>>> branch 'master' of https://github.com/JacobMoxham/InteractionDesignRepo
 	@FXML
 	public void bladePress() throws IOException {
 		if(clickable){
