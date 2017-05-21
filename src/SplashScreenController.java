@@ -51,6 +51,7 @@ public class SplashScreenController implements Initializable {
 	
 	Flag currentFlag;
 	
+	
 	@FXML
 	private void handleButtonAction(ActionEvent event) throws IOException {
 	     if(event.getSource() == splashScreenInfoButton){   

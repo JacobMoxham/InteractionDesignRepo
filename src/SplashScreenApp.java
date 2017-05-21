@@ -17,6 +17,10 @@ public class SplashScreenApp extends Application {
 		 private BorderPane rootLayout;
 		 private boolean by3Hours;
 		 
+		 private List<List<WeatherObject>> by3HoursData;
+		 private List<WeatherObject> byDayData;
+		 private WeatherObject currentWeatherData;
+		 
 		@FXML
 		ImageView imageView;
 		 
@@ -28,7 +32,10 @@ public class SplashScreenApp extends Application {
 		
 		     initRootLayout();     
 		     showBasicFrame();
-			
+			//initialise data lists
+		     by3HoursData = WeatherDataReader.getNextFiveDaysHourly();
+		     byDayData = WeatherDataReader.getDayForecasts();
+		     currentWeatherData = WeatherDataReader.getDataForNow();
 		}
 		
 		private void initRootLayout(){
@@ -116,6 +123,30 @@ public class SplashScreenApp extends Application {
 		
 		public void setBy3Hours(boolean by3Hours) {
 			this.by3Hours = by3Hours;
+		}
+
+		public List<List<WeatherObject>> getBy3HoursData() {
+			return by3HoursData;
+		}
+
+		public void setBy3HoursData(List<List<WeatherObject>> by3HoursData) {
+			this.by3HoursData = by3HoursData;
+		}
+
+		public List<WeatherObject> getByDayData() {
+			return byDayData;
+		}
+
+		public void setByDayData(List<WeatherObject> byDayData) {
+			this.byDayData = byDayData;
+		}
+
+		public WeatherObject getCurrentWeatherData() {
+			return currentWeatherData;
+		}
+
+		public void setCurrentWeatherData(WeatherObject currentWeatherData) {
+			this.currentWeatherData = currentWeatherData;
 		}
 
 }

@@ -67,7 +67,7 @@ public class By3HoursController {
 			forecasts.add(todayLabel);
 			
 			//Blade with current weather
-			WeatherObject currentWeather = WeatherDataReader.getDataForNow();
+			WeatherObject currentWeather = mainApp.getCurrentWeatherData();
 			Node thisBlade = (Node) bladeLoader.load();
 			BladeController todayController = (BladeController) bladeLoader.getController();
 			todayController.setMainApp(mainApp);
@@ -87,7 +87,7 @@ public class By3HoursController {
 			
 			//test value
 			//int total = 0;
-			for(List<WeatherObject> l : WeatherDataReader.getNextFiveDaysHourly()){
+			for(List<WeatherObject> l : mainApp.getBy3HoursData()){
 				//Adds the correct week Day label
 				if (notFirst){
 					Label label = new Label(l.get(0).getDate().split("\\s")[0]);
