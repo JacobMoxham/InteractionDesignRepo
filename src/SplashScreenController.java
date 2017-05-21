@@ -55,6 +55,7 @@ public class SplashScreenController implements Initializable {
 	@FXML
 	private void handleButtonAction(ActionEvent event) throws IOException {
 	     if(event.getSource() == splashScreenInfoButton){   
+	    	 pScreen.setPrevious("splash");
 	    	 mainApp.showFlagsInfo();
 	     }
 	     else

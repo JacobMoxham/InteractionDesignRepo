@@ -26,13 +26,13 @@ public class MiniFlagController {
 	private StringProperty flagText = new SimpleStringProperty();
 	@FXML
 	private StringProperty flagString = new SimpleStringProperty();
-
 	
 	@FXML
 	private void handleButtonAction(ActionEvent event) throws IOException {
 	    
 	     if(event.getSource() == miniFlagInfoButton){   
-	    	 mainApp.showFlagsInfo();
+	    	 	pScreen.setPrevious("notSplash");
+	    		 mainApp.showFlagsInfo();
 	     }
 	     else
 	     {
