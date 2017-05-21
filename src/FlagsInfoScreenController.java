@@ -19,6 +19,12 @@ public class FlagsInfoScreenController implements Initializable {
 	@FXML
 	private Button buttonGoBackToSplashScreen;
 	
+	private SplashScreenApp mainApp;
+	
+	public void setMainApp(SplashScreenApp mainApp){
+		this.mainApp = mainApp;
+	}
+	
 	@FXML
 	private void handleButtonAction(ActionEvent event) throws IOException {
 	     Stage stage=null; 
@@ -26,12 +32,7 @@ public class FlagsInfoScreenController implements Initializable {
 
 	     if(event.getSource() == buttonGoBackToSplashScreen){
 	    	 
-	    	 stage=(Stage) buttonGoBackToSplashScreen.getScene().getWindow();
-		     root = FXMLLoader.load(getClass().getResource("SplashScreen.fxml"));
-		  // create a new scene with root and set the stage
-			 Scene scene = new Scene(root);
-			 stage.setScene(scene);
-			 stage.show();
+	    	mainApp.showBasicFrame();
 	     }else{
 	    	 throw new IOException("Fail at clicking button");
 	     }

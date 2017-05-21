@@ -6,6 +6,7 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.text.Text;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,7 +21,6 @@ import javafx.scene.text.Text;
 import javafx.util.converter.TimeStringConverter;
 
 public class BladeController {
-	
 	private boolean clickable;
 	//Tracks swipe starts
 	private double lastX;
@@ -113,6 +113,7 @@ public class BladeController {
 		this.windImageObj.setRotate(Double.parseDouble(windDegreeString.get()));
 		this.bladeImage.setImage(new Image(bladeString.get()));
 	}
+	
 	public void instantiate(String temp,String time,String iconURL,String windDegree,String windSpeed,String date){
 		instantiate(temp,time,iconURL,windDegree,windSpeed,date,false);
 	}
@@ -213,6 +214,9 @@ public class BladeController {
 	    		}
 	    		
 	    	}else{
+	    		if(mainApp == null){
+	    			System.out.println("gotcha");
+	    		}
 	    		if (mainApp.isBy3Hours()){
 	    			mainApp.showByDay();
 	    		}else{

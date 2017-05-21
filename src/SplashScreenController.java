@@ -34,6 +34,8 @@ public class SplashScreenController implements Initializable {
 	
 	@FXML
     private ImageView windImageView;
+	@FXML
+	private Label splashFlagInfo;
 	
 	@FXML
     private ImageView weatherImageView;
@@ -51,14 +53,8 @@ public class SplashScreenController implements Initializable {
 	
 	@FXML
 	private void handleButtonAction(ActionEvent event) throws IOException {
-	     Stage stage=null; 
-	     Parent root=null;
 	     if(event.getSource() == splashScreenInfoButton){   
-	    	 stage=(Stage) splashScreenInfoButton.getScene().getWindow();
-	    	 root = FXMLLoader.load(getClass().getResource("FlagsInfoScreen.fxml"));
-		     Scene scene = new Scene(root);
-		     stage.setScene(scene);
-		     stage.show();
+	    	 mainApp.showFlagsInfo();
 	     }
 	     else
 	     {
@@ -78,15 +74,20 @@ public class SplashScreenController implements Initializable {
 		switch (currentFlag) {
 			case GREEN:
 				FlagImagePath = new Image("flaggreen.png");
+				splashFlagInfo.setText("There are no restrictions on which crews may boat.");
+				
 				break;
 			case YELLOW:
 				FlagImagePath = new Image("flagyellow.png");
+				splashFlagInfo.setText("Boating is restricted to University crews, first VIIIs, men's crews in the top 2 divisions of the May Bumps and women's crews in the top division of the May Bumps as well as first fours and tub pairs. Members of crews permitted to boat under a Yellow Flag may do so in fours or small boats (i.e. single and double sculls and pairs) with the express permission of the Club Captain and/or Boatman.");
 				break;
 			case REDYELLOW:
 				FlagImagePath = new Image("flagyellowred.png");
+				splashFlagInfo.setText("The river is closed, except to tub pairs between Jesus Lock and Chesterton and University crews with the express permission of their Head Coach.");
 				break;
 			case RED:
 				FlagImagePath = new Image("flagred.png");
+				splashFlagInfo.setText("The river is closed to all crews.");
 				break;
 			case NOTOPERATIONAL:
 				//TODO: handle this case
