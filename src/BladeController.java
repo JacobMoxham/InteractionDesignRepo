@@ -116,9 +116,9 @@ public class BladeController {
 	}
 	
 	// CHANGES THESE
-	private final double BIG_PICTURE_HEIGHT = 0.0;
-	private final double FLAG_HEIGHT = 0.0;
-	private final double LABEL_HEIGHT = 0.0;
+	private final double BIG_PICTURE_HEIGHT = 50.0;
+	private final double BLADE_HEIGHT = 20.0;
+	private final double LABEL_HEIGHT = 10.0;
 	
 	@FXML
 	public void bladePress() throws IOException {
@@ -131,17 +131,16 @@ public class BladeController {
 			
 			// get flag scroll object
 			ObservableList<Node> childNodes = basePane.getChildren();
-			ScrollPane flagScroll = null;
-			for (Node node : childNodes) if (node.getId() == "flagScroll") flagScroll = (ScrollPane) node;
+			ScrollPane flagScroll = (ScrollPane) childNodes.get(1);
 			
 			// get vbox (where flags and labels are stored
-			VBox vbox = (VBox) ((AnchorPane) flagScroll.getChildrenUnmodifiable().get(0)).getChildren().get(0);
+			VBox vbox = (VBox) ((AnchorPane) flagScroll.getContent()).getChildren().get(0);
 			
 			double y = BIG_PICTURE_HEIGHT;
 			
 			// calculate correct y position
 			for (Node node : vbox.getChildren()) {
-				if (node.getClass() == ImageView.class) y += FLAG_HEIGHT;
+				if (node.getClass() == ImageView.class) y += BLADE_HEIGHT;
 				else if (node.getClass() == Text.class) {
 					// stop when at correct day
 					if (((Text) node).getText() == dayText) break;
