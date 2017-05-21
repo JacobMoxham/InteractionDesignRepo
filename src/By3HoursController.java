@@ -14,6 +14,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseDragEvent;
@@ -25,6 +26,9 @@ public class By3HoursController {
 	
 	@FXML
 	private VBox weatherForecasts;
+	
+	@FXML
+	private ScrollPane flagScroll;
 	
 	//Reference to application
 	private SplashScreenApp mainApp;
@@ -149,3 +153,5 @@ public class By3HoursController {
 	}
 
 }
+
+

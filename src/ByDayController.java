@@ -8,6 +8,7 @@ import javax.print.attribute.standard.DateTimeAtCompleted;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -16,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
@@ -24,14 +26,14 @@ public class ByDayController {
 	private VBox weatherForecasts;
 	
 	//Reference to application
-	private SplashScreenApp mainApp;
+	private MainApp mainApp;
 	
 	@FXML
 	private void initialise(){
 	}
 	
-	public void setMainApp(SplashScreenApp splashScreenApp){
-		this.mainApp = splashScreenApp;	
+	public void setMainApp(MainApp mainApp){
+		this.mainApp = mainApp;	
 		try {
 			//Populate VBOX
 			ObservableList<Node> forecasts = FXCollections.observableArrayList();
@@ -52,7 +54,6 @@ public class ByDayController {
 				
 				Node thisBlade = (Node) loader.load();
 				BladeController cont = (BladeController) loader.getController();
-				cont.setMainApp(mainApp);
 				cont.instantiate(w.getTemp(),w.getTime(),w.getIconURL(),w.getWindDegree(),w.getWindSpeed(),w.getDate(),clickable);
 				
 				forecasts.add(thisBlade);
@@ -79,4 +80,5 @@ public class ByDayController {
 		}
 		
 	}
+
 }
