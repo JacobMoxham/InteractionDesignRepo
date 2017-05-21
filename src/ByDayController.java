@@ -42,7 +42,7 @@ public class ByDayController {
 			//By day data
 			int day = 0;
 			boolean clickable=true;
-			for(WeatherObject w: WeatherDataReader.getDayForecasts()){
+			for(WeatherObject w: mainApp.getByDayData()){
 				//--Less efficient version of the hack around below--
 				//FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("Blade.fxml"));
 				//loader.setController(new BladeController(w.getTemp(),w.getTime(),w.getIconURL(),w.getWindDegree(),w.getWindSpeed(),w.getDate()));
