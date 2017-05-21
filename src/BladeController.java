@@ -1,16 +1,33 @@
+import java.io.IOException;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+<<<<<<< HEAD
 import javafx.scene.text.Text;
+=======
+import javafx.scene.Node;
+>>>>>>> branch 'master' of https://github.com/JacobMoxham/InteractionDesignRepo
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+<<<<<<< HEAD
+=======
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+>>>>>>> branch 'master' of https://github.com/JacobMoxham/InteractionDesignRepo
 import javafx.util.converter.TimeStringConverter;
 
 public class BladeController {
 	private boolean clickable;
-	
+	//Tracks swipe starts
+	private double lastX;
 	@FXML
 	private ImageView windImageObj;
 	@FXML
@@ -105,10 +122,49 @@ public class BladeController {
 		instantiate(temp,time,iconURL,windDegree,windSpeed,date,false);
 	}
 	
+<<<<<<< HEAD
+=======
+	// CHANGES THESE
+	private final double BIG_PICTURE_HEIGHT = 50.0;
+	private final double BLADE_HEIGHT = 20.0;
+	private final double LABEL_HEIGHT = 10.0;
+	
+>>>>>>> branch 'master' of https://github.com/JacobMoxham/InteractionDesignRepo
 	@FXML
-	public void bladePress(){
+	public void bladePress() throws IOException {
 		if(clickable){
-			System.out.println("click");
+			// get blade day
+			String dayText = day.getText();
+			
+			// switch to by 3 hours page
+			AnchorPane basePane = mainApp.showBy3Hours();
+			
+			// get flag scroll object
+			ObservableList<Node> childNodes = basePane.getChildren();
+			ScrollPane flagScroll = (ScrollPane) childNodes.get(1);
+			
+			// get vbox (where flags and labels are stored
+			VBox vbox = (VBox) ((AnchorPane) flagScroll.getContent()).getChildren().get(0);
+			
+			double y = BIG_PICTURE_HEIGHT;
+			
+			// calculate correct y position
+			for (Node node : vbox.getChildren()) {
+				if (node.getClass() == ImageView.class) y += BLADE_HEIGHT;
+				else if (node.getClass() == Text.class) {
+					// stop when at correct day
+					if (((Text) node).getText() == dayText) break;
+					
+					y += LABEL_HEIGHT;
+				}	
+			}
+
+	        // scroll to correct location (scrolling values range from 0 to 1)
+	        double height = flagScroll.getContent().getBoundsInLocal().getHeight();
+	        flagScroll.setVvalue(y/height);
+
+	        // just for usability
+	        flagScroll.requestFocus();
 		}
 	}
 	
@@ -122,5 +178,55 @@ public class BladeController {
 
 	public void setClickable(boolean clickable) {
 		this.clickable = clickable;
+	}
+	//Handles swipes
+	@FXML
+	private void handleDragAction(MouseEvent event) throws IOException {
+		
+		// ARBITRARY -- CHANGE IF REQUIRED
+		double minDragDistance = 64;
+		
+		
+		//System.out.println(event.getEventType());
+		
+		
+		
+		// record x on start of drag
+		if (event.getEventType().equals(MouseDragEvent.MOUSE_PRESSED)) {
+			System.out.println("DRAG START");
+			lastX = event.getScreenX();
+		} else
+		// determine whether to change screen or not on end of drag
+		if (event.getEventType().equals(MouseDragEvent.MOUSE_RELEASED)) {
+			System.out.println("DRAG END");
+			// calculate change in x over mouse drag
+			double deltaX = event.getScreenX() - lastX;
+			System.out.println("DELTAX:" + deltaX);
+			
+			// ignore if less than threshold
+			if (Math.abs(deltaX) < minDragDistance) return;
+			
+			// determine if user is scrolling right (+ve)
+			boolean isScrollLeft = (deltaX >= 0);
+		     
+		    System.out.println(""); 
+	    	if (isScrollLeft){
+	    		if (mainApp.isBy3Hours()){
+	    			mainApp.showBasicFrame();
+	    		}else{
+	    			mainApp.showBy3Hours();
+	    		}
+	    		
+	    	}else{
+	    		if (mainApp.isBy3Hours()){
+	    			mainApp.showByDay();
+	    		}else{
+	    			return;
+	    		}
+	    	}
+
+           
+		}
+		
 	}
 }
