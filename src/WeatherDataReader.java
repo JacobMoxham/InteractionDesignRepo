@@ -163,11 +163,11 @@ public class WeatherDataReader {
 				windDegree = String.valueOf(forecast.getWindDegree());
 				iconURL = "http://openweathermap.org/img/w/" + forecast.getWeatherInstance(0).getWeatherIconName() +".png";
 				//Creates weather object for weather at this time
-				WeatherObject weatherNow = new WeatherObject(date,time,temp,iconURL,windSpeed,windDegree);
+				if(!forecast.getDateTime().before(new Date())){
+					WeatherObject weatherNow = new WeatherObject(date,time,temp,iconURL,windSpeed,windDegree);
+					daysForecast.add(weatherNow);
+				}				
 				
-				
-				
-				daysForecast.add(weatherNow);
 				
 			}
 	

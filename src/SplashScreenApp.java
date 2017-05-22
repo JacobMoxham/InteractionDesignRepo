@@ -231,9 +231,16 @@ public class SplashScreenApp extends Application {
 			//By day data
 			int day = 0;
 			boolean clickable=true;
-			for(WeatherObject w: this.getByDayData()){
+			List<WeatherObject> days = this.getByDayData();
+			int noClickable;
+			if(days.size() == 15){
+				noClickable = 4;
+			}else{
+				noClickable = 3;
+			}
+			for(WeatherObject w: days){
 				
-				if(day>4){
+				if(day>noClickable){
 					clickable = false;
 				}
 				
@@ -241,7 +248,7 @@ public class SplashScreenApp extends Application {
 				BladeController cont = (BladeController) loader.getController();
 				cont.setMainApp(this);
 				cont.instantiate(w.getTemp(),"",w.getIconURL(),w.getWindDegree(),w.getWindSpeed(),w.getDate(),clickable);
-				
+				System.out.println(w.getDate());
 				dayForecasts.add(thisBlade);
 				
 				//Allows us to read in another instance
