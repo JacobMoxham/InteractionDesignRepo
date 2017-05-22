@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -50,12 +51,13 @@ public class SplashScreenApp extends Application {
 	
 	     initRootLayout();     
 	     showBasicFrame();
-		//initialise data lists
+	     //initialise data lists
 	     by3HoursData = WeatherDataReader.getNextFiveDaysHourly();
 	     byDayData = WeatherDataReader.getDayForecasts();
 	     currentWeatherData = WeatherDataReader.getDataForNow();
-	     calculatebyDayBlades();
-	     calculateby3HoursBlades();
+	     //Calculate the blades so it only has to be done once
+	     Date lastDate = calculateby3HoursBlades();
+	     calculatebyDayBlades(lastDate);
 	}
 	
 	private void initRootLayout(){
@@ -95,7 +97,6 @@ public class SplashScreenApp extends Application {
 	public AnchorPane showBy3Hours() throws IOException {
 		//Load the 3 hours view and give it control
 		by3Hours = true;
-		System.out.println(Boolean.toString(by3Hours));
 	
 		FXMLLoader loader = new FXMLLoader();
 	    loader.setLocation(SplashScreenApp.class.getResource("BasicFrame.fxml"));
@@ -113,7 +114,6 @@ public class SplashScreenApp extends Application {
 	public AnchorPane showByDay() throws IOException {
 		//Show the by day view and give it control
 		by3Hours = false;
-		System.out.println(Boolean.toString(by3Hours));
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(SplashScreenApp.class.getResource("ByDay.fxml"));
 		AnchorPane basicView = (AnchorPane) loader.load();
@@ -137,7 +137,7 @@ public class SplashScreenApp extends Application {
 	    return primaryStage;
 	}
 	
-	public void calculateby3HoursBlades(){
+	public Date calculateby3HoursBlades(){
 		try {
 			
 			//Calculate values to populate VBox
@@ -187,7 +187,8 @@ public class SplashScreenApp extends Application {
 			
 			//test value
 			//int total = 0;
-			for(List<WeatherObject> l : this.getBy3HoursData()){
+			
+			for(List<WeatherObject> l : by3HoursData){
 				//Adds the correct week Day label
 				if (notFirst){
 					Label label = new Label(l.get(0).getDate().split("\\s")[0]);
@@ -213,34 +214,34 @@ public class SplashScreenApp extends Application {
 					//total++;
 				}
 			}
+			List<WeatherObject> lastDay = by3HoursData.get(by3HoursData.size()-1);
+			DateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'BST' yyyy");
+			return format.parse(lastDay.get(lastDay.size()-1).getDate());
 
-		} catch (IOException e) {
+		} catch (IOException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
 	public ObservableList<Node> get3HourlyForecasts(){
 		return hourlyForecasts;
 	}
-	public void calculatebyDayBlades(){
+	public void calculatebyDayBlades(Date lastDate){
 		try {
 			//Calculate values for by day VBox
 			dayForecasts = FXCollections.observableArrayList();
 			FXMLLoader loader = new FXMLLoader(SplashScreenApp.class.getResource("Blade.fxml"));
 			
 			//By day data
-			int day = 0;
 			boolean clickable=true;
 			List<WeatherObject> days = this.getByDayData();
-			int noClickable;
-			if(days.size() == 15){
-				noClickable = 4;
-			}else{
-				noClickable = 3;
-			}
+			
 			for(WeatherObject w: days){
+				DateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'BST' yyyy");
 				
-				if(day>noClickable){
+				
+				if(format.parse(w.getDate()).after(lastDate)){
 					clickable = false;
 				}
 				
@@ -248,16 +249,15 @@ public class SplashScreenApp extends Application {
 				BladeController cont = (BladeController) loader.getController();
 				cont.setMainApp(this);
 				cont.instantiate(w.getTemp(),"",w.getIconURL(),w.getWindDegree(),w.getWindSpeed(),w.getDate(),clickable);
-				System.out.println(w.getDate());
 				dayForecasts.add(thisBlade);
 				
 				//Allows us to read in another instance
 				loader.setRoot(null);
 				loader.setController(null);
-				day++;
+				
 			}
 
-		} catch (IOException e) {
+		} catch (IOException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
