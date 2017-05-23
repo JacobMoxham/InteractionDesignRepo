@@ -51,9 +51,9 @@
       <ImageView fx:id="weatherImageView" fitHeight="108.0" fitWidth="152.0" layoutX="211.0" layoutY="362.0" onMousePressed="#handleDragAction" onMouseReleased="#handleDragAction" pickOnBounds="true" preserveRatio="true" />
       <Pane layoutX="-5.0" layoutY="522.0" prefHeight="88.0" prefWidth="363.0">
          <children>
-            <Circle layoutX="142.0" layoutY="44.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle layoutX="192.0" layoutY="44.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle layoutX="232.0" layoutY="44.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle layoutX="142.0" layoutY="44.0" opacity="0.2" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle layoutX="192.0" layoutY="44.0" opacity="0.2" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle layoutX="232.0" layoutY="44.0" opacity="0.2" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
       <Label fx:id="splashFlagInfo" layoutX="29.0" layoutY="80.0" prefHeight="101.0" prefWidth="292.0" text="TEXT" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
