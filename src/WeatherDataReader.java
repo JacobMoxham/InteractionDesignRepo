@@ -153,6 +153,7 @@ public class WeatherDataReader {
 			int n = dwd.getForecastCount();
 			
 			for(int i =0; i < n; i++){
+				
 				//Gets the next forecast
 				net.aksingh.owmjapis.DailyForecast.Forecast forecast = dwd.getForecastInstance(i);
 				
@@ -164,7 +165,10 @@ public class WeatherDataReader {
 				windDegree = String.valueOf(forecast.getWindDegree());
 				iconURL = "http://openweathermap.org/img/w/" + forecast.getWeatherInstance(0).getWeatherIconName() +".png";
 				//Creates weather object for weather at this time
-				if(!forecast.getDateTime().before(new Date())){
+				Calendar current = Calendar.getInstance();
+			    current.set(current.get(Calendar.YEAR),current.get(Calendar.MONTH),current.get(Calendar.DATE),0,0,0);
+			    Date now = current.getTime();
+				if(!forecast.getDateTime().before(now)){
 					WeatherObject weatherNow = new WeatherObject(date,time,temp,iconURL,windSpeed,windDegree);
 					daysForecast.add(weatherNow);
 				}				

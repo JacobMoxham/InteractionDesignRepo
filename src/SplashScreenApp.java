@@ -240,9 +240,7 @@ public class SplashScreenApp extends Application {
 			List<WeatherObject> days = this.getByDayData();
 			
 			for(WeatherObject w: days){
-				DateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'BST' yyyy");
-				
-				
+				DateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'BST' yyyy");				
 				if(format.parse(w.getDate()).after(lastDate)){
 					clickable = false;
 				}
