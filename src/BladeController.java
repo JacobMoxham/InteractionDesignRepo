@@ -101,9 +101,9 @@ public class BladeController {
 	}
 
 	// change these to fit the size of components used
-	private final double FLAG_HEIGHT = 100.0;
-	private final double BLADE_HEIGHT = 104.2;
-	private final double LABEL_HEIGHT = 34.5;
+	private final double FLAG_HEIGHT = 90.0;
+	private final double LABEL_HEIGHT = 26.0;
+	private final double BLADE_HEIGHT = 90.0;
 	
 	@FXML
 	public void bladePress() throws IOException {
