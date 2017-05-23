@@ -48,7 +48,7 @@ public class SplashScreenApp extends Application {
 		// TODO Auto-generated method stub
 		 this.primaryStage = primaryStage;
 	     this.primaryStage.setTitle("Ergs Don't FLoat");
-	
+	     this.primaryStage.setResizable(false);
 	     initRootLayout();     
 	     showBasicFrame();
 	     //initialise data lists
