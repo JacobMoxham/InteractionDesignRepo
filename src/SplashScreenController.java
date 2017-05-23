@@ -1,5 +1,8 @@
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -106,9 +109,12 @@ public class SplashScreenController implements Initializable {
 	
 	private void setData() {
 		
-		WeatherObject wo = WeatherDataReader.getDataForNow();
+		WeatherObject wo = mainApp.getCurrentWeatherData();
+		DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+		Date timeNow = new Date();
+		String now = dateFormat.format(timeNow);
 		
-		timeLabel.setText(wo.getTime());
+		timeLabel.setText(now);
 		String temp = wo.getTemp() + "\u00b0"+"C";
 		tempLabel.setText(temp);
 		

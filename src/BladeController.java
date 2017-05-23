@@ -105,56 +105,6 @@ public class BladeController {
 	private final double LABEL_HEIGHT = 26.0;
 	private final double BLADE_HEIGHT = 90.0;
 	
-	@FXML
-	public void bladePress() throws IOException {
-		if(clickable){
-			// get blade day
-			String dayText = day.getText();
-
-			// special case -- today (WARNING: UNREADABLE LINE OF CODE AHEAD :)))
-			dayText = dayText.toUpperCase().equals(LocalDate.now().getDayOfWeek().toString().substring(0, 3)) ? "Tod" : dayText;
-			
-			// switch to by 3 hours page
-			AnchorPane basePane = mainApp.showBy3Hours();
-			
-			// get flag scroll object
-			ObservableList<Node> childNodes = basePane.getChildren();
-			ScrollPane flagScroll = (ScrollPane) childNodes.get(1);
-			
-			// get vbox (where flags and labels are stored
-			VBox vbox = (VBox) ((AnchorPane) flagScroll.getContent()).getChildren().get(0);
-			
-			double y = FLAG_HEIGHT;
-			boolean isFirstNode = true;
-			
-			// calculate correct y position
-			for (Node node : vbox.getChildren()) {
-				// exclude flag from calculation
-				if (isFirstNode) {
-					isFirstNode = false;
-					continue;
-				}
-				
-				if (node.getClass() == AnchorPane.class) {
-					y += BLADE_HEIGHT;
-					System.out.println("blade");
-				}
-				else if (node.getClass() == Label.class) {
-					// stop when at correct day
-					if (((Label) node).getText().substring(0, 3).equals(dayText)) break;
-					System.out.println("label");
-					y += LABEL_HEIGHT;
-				}
-			}
-
-	        // scroll to correct location (scrolling values range from 0 to 1)
-	        double height = flagScroll.getContent().getBoundsInLocal().getHeight();
-	        
-	        ((ScrollPane) childNodes.get(1)).setVvalue(y/height);
-
-	        flagScroll.requestFocus();
-		}
-	}
 	
 	public void setMainApp(SplashScreenApp mainApp){
 		this.mainApp = mainApp;
@@ -185,29 +135,79 @@ public class BladeController {
 			double deltaX = event.getScreenX() - lastX;
 			
 			// ignore if less than threshold
-			if (Math.abs(deltaX) < minDragDistance) return;
-			
-			// determine if user is scrolling right (+ve)
-			boolean isScrollLeft = (deltaX >= 0);
-		     
-		    System.out.println(""); 
-	    	if (isScrollLeft){
-	    		System.out.println("left");
-	    		if (mainApp.isBy3Hours()){
-	    			mainApp.showBasicFrame();
-	    		}else{
-	    			mainApp.showBy3Hours();
-	    		}
-	    		
-	    	}else{
-	    		if (mainApp.isBy3Hours()){
-	    			mainApp.showByDay();
-	    		}else{
-	    			return;
-	    		}
-	    	}
+			if (Math.abs(deltaX) > minDragDistance){
+				System.out.println("caught Drag");
 
-           
+			
+				// determine if user is scrolling right (+ve)
+				boolean isScrollLeft = (deltaX >= 0);
+			     
+			    System.out.println(""); 
+		    	if (isScrollLeft){
+		    		System.out.println("left");
+		    		if (mainApp.isBy3Hours()){
+		    			mainApp.showBasicFrame();
+		    		}else{
+		    			mainApp.showBy3Hours();
+		    		}
+		    		
+		    	}else{
+		    		if (mainApp.isBy3Hours()){
+		    			mainApp.showByDay();
+		    		}else{
+		    			return;
+		    		}
+		    	}
+			}else{
+				System.out.println("caught click");
+				if(clickable){
+					// get blade day
+					String dayText = day.getText();
+
+					// special case -- today (WARNING: UNREADABLE LINE OF CODE AHEAD :)))
+					dayText = dayText.toUpperCase().equals(LocalDate.now().getDayOfWeek().toString().substring(0, 3)) ? "Tod" : dayText;
+					
+					// switch to by 3 hours page
+					AnchorPane basePane = mainApp.showBy3Hours();
+					
+					// get flag scroll object
+					ObservableList<Node> childNodes = basePane.getChildren();
+					ScrollPane flagScroll = (ScrollPane) childNodes.get(1);
+					
+					// get vbox (where flags and labels are stored
+					VBox vbox = (VBox) ((AnchorPane) flagScroll.getContent()).getChildren().get(0);
+					
+					double y = FLAG_HEIGHT;
+					boolean isFirstNode = true;
+					
+					// calculate correct y position
+					for (Node node : vbox.getChildren()) {
+						// exclude flag from calculation
+						if (isFirstNode) {
+							isFirstNode = false;
+							continue;
+						}
+						
+						if (node.getClass() == AnchorPane.class) {
+							y += BLADE_HEIGHT;
+							System.out.println("blade");
+						}
+						else if (node.getClass() == Label.class) {
+							// stop when at correct day
+							if (((Label) node).getText().substring(0, 3).equals(dayText)) break;
+							System.out.println("label");
+							y += LABEL_HEIGHT;
+						}
+					}
+				
+			        // scroll to correct location (scrolling values range from 0 to 1)
+			        double height = flagScroll.getContent().getBoundsInLocal().getHeight();
+			        
+			        ((ScrollPane) childNodes.get(1)).setVvalue(y/height);
+
+			        flagScroll.requestFocus();
+				}
+			}
 		}
 		
 	}

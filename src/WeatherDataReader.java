@@ -34,7 +34,7 @@ public class WeatherDataReader {
         CurrentWeather cwd;
 		try {
 			//Gets data for Cambridge
-			cwd = owm.currentWeatherByCityName("Cambridge");
+			cwd = owm.currentWeatherByCityName("Cambridge","GB");
 			
 			//Populates variables for this time
 			
@@ -77,7 +77,7 @@ public class WeatherDataReader {
 			//Constant
 			final double farenheightProportionality = 5.0/9.0;
 			//Gets data for Cambridge
-			hwd = owm.hourlyForecastByCityName("Cambridge");
+			hwd = owm.hourlyForecastByCityName("Cambridge","GB");
 			int n = hwd.getForecastCount();
 			ArrayList<WeatherObject> dayForecast = new ArrayList<>();
 			Date lastDay = hwd.getForecastInstance(0).getDateTime();
@@ -148,7 +148,8 @@ public class WeatherDataReader {
         DailyForecast dwd;
 		try {
 			//Gets data for Cambridge
-			dwd = owm.dailyForecastByCityName("Cambridge", (byte) 15);
+			dwd = owm.dailyForecastByCityName("Cambridge","GB", (byte) 15);
+
 			int n = dwd.getForecastCount();
 			
 			for(int i =0; i < n; i++){
@@ -163,11 +164,11 @@ public class WeatherDataReader {
 				windDegree = String.valueOf(forecast.getWindDegree());
 				iconURL = "http://openweathermap.org/img/w/" + forecast.getWeatherInstance(0).getWeatherIconName() +".png";
 				//Creates weather object for weather at this time
-				WeatherObject weatherNow = new WeatherObject(date,time,temp,iconURL,windSpeed,windDegree);
+				if(!forecast.getDateTime().before(new Date())){
+					WeatherObject weatherNow = new WeatherObject(date,time,temp,iconURL,windSpeed,windDegree);
+					daysForecast.add(weatherNow);
+				}				
 				
-				
-				
-				daysForecast.add(weatherNow);
 				
 			}
 	
