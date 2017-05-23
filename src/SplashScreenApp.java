@@ -45,19 +45,20 @@ public class SplashScreenApp extends Application {
 	 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
-		 this.primaryStage = primaryStage;
-	     this.primaryStage.setTitle("Ergs Don't FLoat");
-	     this.primaryStage.setResizable(false);
-	     initRootLayout();     
-	     showBasicFrame();
-	     //initialise data lists
+		 //initialise data lists
 	     by3HoursData = WeatherDataReader.getNextFiveDaysHourly();
 	     byDayData = WeatherDataReader.getDayForecasts();
 	     currentWeatherData = WeatherDataReader.getDataForNow();
 	     //Calculate the blades so it only has to be done once
 	     Date lastDate = calculateby3HoursBlades();
 	     calculatebyDayBlades(lastDate);
+	     //Show splash screen
+	     this.primaryStage = primaryStage;
+	     this.primaryStage.setTitle("Ergs Don't FLoat");
+	     this.primaryStage.setResizable(false);
+	     initRootLayout();     
+	     showBasicFrame();
+	    
 	}
 	
 	private void initRootLayout(){
@@ -89,10 +90,11 @@ public class SplashScreenApp extends Application {
 	    // Load splash screen and give it control
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(SplashScreenApp.class.getResource("SplashScreen.fxml"));
+		SplashScreenController splashCont = new SplashScreenController();
+		splashCont.setMainApp(this);
+		loader.setController(splashCont);
 		AnchorPane basicView = (AnchorPane) loader.load();
 		rootLayout.setCenter(basicView);
-		SplashScreenController ssc = (SplashScreenController) loader.getController();
-		ssc.setMainApp(this);
 	}
 	public AnchorPane showBy3Hours() throws IOException {
 		//Load the 3 hours view and give it control
