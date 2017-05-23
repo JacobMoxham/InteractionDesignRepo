@@ -20,7 +20,7 @@ import javafx.scene.layout.VBox;
 public class BladeController {
 	//Tracks if this blade can be clicked
 	private boolean clickable;
-	//Tracks swipe starts
+	//Tracks where swipe starts
 	private double lastX;
 	
 	//Holds references to the fxml objects
@@ -62,13 +62,12 @@ public class BladeController {
 	private SplashScreenApp mainApp;
 	
 	public void initialize(){
-		
 	}
-	public BladeController(){
-		
+	
+	public BladeController(){	
 	}
 
-	public void instantiate(String temp,String time,String iconURL,String windDegree,String windSpeed,String date,Boolean clickable){
+	public void instantiate(String temp, String time, String iconURL, String windDegree, String windSpeed, String date, Boolean clickable){
 		//Set string variables
 		timeString.set(time);
 		weatherImage.set(iconURL);
@@ -96,8 +95,8 @@ public class BladeController {
 		this.bladeImage.setImage(new Image(bladeString.get()));
 	}
 	
-	public void instantiate(String temp,String time,String iconURL,String windDegree,String windSpeed,String date){
-		instantiate(temp,time,iconURL,windDegree,windSpeed,date,false);
+	public void instantiate(String temp, String time, String iconURL, String windDegree, String windSpeed, String date){
+		instantiate(temp, time, iconURL, windDegree, windSpeed, date, false);
 	}
 
 	// change these to fit the size of components used
@@ -107,6 +106,7 @@ public class BladeController {
 	
 	
 	public void setMainApp(SplashScreenApp mainApp){
+		//Copy reference to main application
 		this.mainApp = mainApp;
 	}
 
@@ -121,68 +121,65 @@ public class BladeController {
 	//Handles swipes (drags)
 	@FXML
 	private void handleDragAction(MouseEvent event) throws IOException {
-		
-		// ARBITRARY -- CHANGE IF REQUIRED
+		//Minimum distance to qualify as a mouse drag event
 		double minDragDistance = 50;
 		
-		// record x on start of drag
+		//Record mouse x on start of drag
 		if (event.getEventType().equals(MouseDragEvent.MOUSE_PRESSED)) {
 			lastX = event.getScreenX();
 		} else
-		// determine whether to change screen or not on end of drag
+		//Determine whether to change screen or not on end of drag
 		if (event.getEventType().equals(MouseDragEvent.MOUSE_RELEASED)) {
 			// calculate change in x over mouse drag
 			double deltaX = event.getScreenX() - lastX;
 			
-			// ignore if less than threshold
-			if (Math.abs(deltaX) > minDragDistance){
-				System.out.println("caught Drag");
-
-			
-				// determine if user is scrolling right (+ve)
+			//Drag if more than or equal to threshold
+			if (Math.abs(deltaX) >= minDragDistance){
+				//Determine if user is scrolling right (+ve)
 				boolean isScrollLeft = (deltaX >= 0);
-			     
-			    System.out.println(""); 
+
 		    	if (isScrollLeft){
-		    		System.out.println("left");
 		    		if (mainApp.isBy3Hours()){
 		    			mainApp.showBasicFrame();
-		    		}else{
+		    		} else{
 		    			mainApp.showBy3Hours();
 		    		}
 		    		
-		    	}else{
+		    	} else{
 		    		if (mainApp.isBy3Hours()){
 		    			mainApp.showByDay();
-		    		}else{
+		    		} else{
 		    			return;
 		    		}
 		    	}
-			}else{
-				System.out.println("caught click");
+			} 
+			//Else treated as a click
+			else{
 				if(clickable){
-					// get blade day
+					//Get blade day
 					String dayText = day.getText();
 
-					// special case -- today (WARNING: UNREADABLE LINE OF CODE AHEAD :)))
+					//Special case (today) -- get today's date and match to current day 
 					dayText = dayText.toUpperCase().equals(LocalDate.now().getDayOfWeek().toString().substring(0, 3)) ? "Tod" : dayText;
 					
-					// switch to by 3 hours page
+					//Switch to by 3 hours page
 					AnchorPane basePane = mainApp.showBy3Hours();
 					
-					// get flag scroll object
+					//Get flag scroll object
 					ObservableList<Node> childNodes = basePane.getChildren();
 					ScrollPane flagScroll = (ScrollPane) childNodes.get(1);
 					
-					// get vbox (where flags and labels are stored
+					//Get vbox (where flags and labels are stored)
 					VBox vbox = (VBox) ((AnchorPane) flagScroll.getContent()).getChildren().get(0);
 					
+					//How much to scroll down
 					double y = FLAG_HEIGHT;
+					//To exclude top flag from loop
 					boolean isFirstNode = true;
 					
-					// calculate correct y position
+					//Calculate correct y position
 					for (Node node : vbox.getChildren()) {
-						// exclude flag from calculation
+						//Exclude flag from calculation
 						if (isFirstNode) {
 							isFirstNode = false;
 							continue;
@@ -190,25 +187,24 @@ public class BladeController {
 						
 						if (node.getClass() == AnchorPane.class) {
 							y += BLADE_HEIGHT;
-							System.out.println("blade");
 						}
 						else if (node.getClass() == Label.class) {
-							// stop when at correct day
+							//Stop when at correct day
 							if (((Label) node).getText().substring(0, 3).equals(dayText)) break;
-							System.out.println("label");
+
 							y += LABEL_HEIGHT;
 						}
 					}
 				
-			        // scroll to correct location (scrolling values range from 0 to 1)
+			        //Scroll to correct location (scrolling values range from 0 to 1 so have to normalise)
 			        double height = flagScroll.getContent().getBoundsInLocal().getHeight();
-			        
 			        ((ScrollPane) childNodes.get(1)).setVvalue(y/height);
-
+			        
+			        //Gives focus to scroll (for usability)
 			        flagScroll.requestFocus();
 				}
 			}
-		}
-		
+		}	
 	}
+	
 }

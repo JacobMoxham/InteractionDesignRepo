@@ -16,10 +16,10 @@ public class By3HoursController {
 	}
 	
 	public void setMainApp(SplashScreenApp splashScreenApp){
+		//Copy reference to main application
 		this.mainApp = splashScreenApp;	
-		//Populate VBOX
+		//Populate VBOX with retrieved 3 hour forecasts (put into blade objects)
 		weatherForecasts.getChildren().addAll(mainApp.get3HourlyForecasts());
-		
 	}
 
 }
